@@ -1,5 +1,7 @@
 # Ensimmäisen viikon raportti
 
+![alt_text](https://media1.giphy.com/media/XYrHWGJPtaQMM/giphy.webp?cid=ecf05e4767a193b68e552f53dbaf4ae133b2a2023d54d4ae&rid=giphy.webp)
+
 ## Mitä olen tehnyt?
 
 Olen osallistunut aloitusluennolle ja valinnut aiheen. Päätin luoda ristinollatekoälyn siitäkin huolimatta, että "tekoäly" kuulostaa vaikealta.
