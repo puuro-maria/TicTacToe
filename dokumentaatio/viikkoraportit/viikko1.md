@@ -20,7 +20,8 @@ Opin huomattavasti aiempaa syvällisemmin minimax-algoritmin periaatteen ja toim
 ## Mitä jäi epäselväksi?
 
 Hieman mietityttää, osaanko lopulta toteuttaa ohjelmaa, mutta luultavasti osaan internetin ja ohjauksen avulla. 
-Mietin myös, mikä olisi paras Javan GUI-pakkaus käyttöliittymälle.
+Mietin myös, mikä olisi paras Javan GUI-pakkaus käyttöliittymälle. 
+Mietityttää myös, kannattaisiko minun lisätä alfa-beetakarsinta vai onko se vaikeampaa kuin kuvittelen.
 
 ## Mitä teen seuraavaksi?
 
