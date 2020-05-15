@@ -11,3 +11,7 @@ Maksimoiva pelaaja pyrkii saavuttamaan mahdollisimman suuren lopputuloksen (täs
 Tekoäly olettaa, että vastapeluri pyrkii aina valitsemaan vastustajansa kannalta huonoimman skenaarion. 
 Jokaisen puun lehdissä on joko arvo 1, -1 tai 0 riippuen kyseisen skenaarion lopputulemasta.
 Jos lehden arvo on 1, maksimoiva pelaaja voittaa, -1 jos minimoiva pelaaja voittaa ja tasapelin tullessa 0. 
+
+### Minimax-puu havainnollistettuna
+
+![alt_text](https://github.com/puuro-maria/TicTacToe/blob/master/dokumentaatio/kuvat/minimaxpuu.PNG)
