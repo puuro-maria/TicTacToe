@@ -1,5 +1,3 @@
-![alt_text](https://media.giphy.com/media/3ogwFPVMxC8pu6I2is/giphy.gif)
-
 # Tic Tac Toe *eli* Ristinolla
 
 Pelaa ristinollaa tekoälyä vastaan ja kehitä pelistrategiaasi. Ohjelman tekoäly on toteutettu perinteisellä minimax-algoritmilla käyttäen lisäksi ohjelmaa tehostavaa alfa-beeta-karsintaa.
@@ -7,6 +5,8 @@ Pelaa ristinollaa tekoälyä vastaan ja kehitä pelistrategiaasi. Ohjelman teko�
 ## Pelin säännöt
 
 Pelissä on kaksi pelaajaa - risti ja nolla. Peliruudukko on perinteisesti 3x3 -kokoinen, mutta tässä pelissä saat itse valita peliruudukon koon välillä 2-10 (niin, että ruutuja on aina yhtä monta horisontaalisesti ja vertikaalisesti). Toinen pelaaja aloittaa sijoittamalla oman merkkinsä (risti tai nolla) johonkin ruutuun. Sen jälkeen on toisen vuoro ja hän tekee samoin, mutta ei voi asettaa merkkiään jo käytössä olevaan ruutuun. Voittaja on se, joka ensimmäisenä saa kokonaisen rivin omia merkkejä joko vaaka-, pysty- tai vinoriville. Perinteisessä 3x3 -ruudukossa voittorivi on pituudeltaan 3, mutta tässä pelissä sekin on pelaajan määriteltävissä välillä 2-10 - kunhan voittorivi ei ole ruudukkoa suurempi.
+
+![alt_text](https://media3.giphy.com/media/l1Et6k00qp9fMTP8s/giphy.gif?cid=ecf05e475bd1d54dd29a0664dee9e7f5ada4ca018d106a9d&rid=giphy.gif)
 
 ## Dokumentaatio
 
