@@ -13,6 +13,8 @@ Otin käyttöön JaCoCo-testikattavuusraportoinnin ja CheckStyle-konffauksen laa
 
 Ohjelmalla on nyt runko ja muutamia metodeja. Mielestäni tämä on ollut hyvä lähtökohta ohjelman rakentamiseen. 
 Testikattavuus on kohtuullisen hyvällä tasolla ja minulla on kohtuulliset käsitykset siitä, mitä seuraavaksi kannattaa lähteä toteuttamaan.
+### Testikattavuusraportti 22.5.2020:
+![alt_text](https://github.com/puuro-maria/TicTacToe/blob/master/dokumentaatio/kuvat/jacoco_vko_2.png)
 
 ## Mitä opin tällä viikolla?
 
