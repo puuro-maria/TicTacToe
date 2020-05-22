@@ -42,6 +42,8 @@ public class BoardTest {
         assertEquals(Cell.BLANK, board.getCell(1, 1));
         assertEquals(Cell.CROSS, anotherBoard.getCell(1,1));
         board.setCell(2, 1, Cell.CIRCLE);
+        assertTrue(board.setCell(2, 2, Cell.CROSS));
+        assertFalse(board.setCell(2, 2, Cell.CIRCLE));
         assertEquals(Cell.CIRCLE, board.getCell(2,1));
     }
 }

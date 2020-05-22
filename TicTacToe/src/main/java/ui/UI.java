@@ -1,8 +1,6 @@
 package ui;
 
-import domain.Board;
-import domain.Cell;
-
+import controls.Controls;
 
 /**
  *This class includes the text-UI of the game
@@ -10,8 +8,7 @@ import domain.Cell;
  */
 public class UI {
     
-    private Board board;
-    private Cell cell;
+
     
     
     
