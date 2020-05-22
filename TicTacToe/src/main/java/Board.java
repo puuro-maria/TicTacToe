@@ -21,4 +21,44 @@ public class Board {
         }
     }
     
+    /**
+     * This method makes a move (inserts your cell on the board)
+     * @param x
+     * @param y
+     * @param cell
+     * @return 
+     */
+    public boolean setCell(int x, int y, Cell cell) {
+        if (isFreeCell(x,y)) {
+            this.board[x][y] = cell;
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * This method checks if a certain cell is available for a move (true or false)
+     * @param x
+     * @param y
+     * @return boolean
+     */
+    public boolean isFreeCell(int x, int y) {
+        if (this.board[x][y] == Cell.BLANK) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * This getter returns the cell value in a specified cell
+     * @param x row of the board
+     * @param y column of the board
+     * @return Cell - blank, circle or cross
+     */
+    public Cell getCell(int x, int y) {
+        return this.board[x][y];
+    }
+    
 }
