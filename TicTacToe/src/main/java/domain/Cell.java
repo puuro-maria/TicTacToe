@@ -1,3 +1,5 @@
+package domain;
+
 
 /**
  * Circles and crosses are initialized as enums  
