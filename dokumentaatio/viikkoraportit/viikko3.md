@@ -17,6 +17,10 @@ Muutin enum-taulukon int-taulukoksi ohjelman tehostamiseksi.
 Ohjelma on sikäli edistynyt, että se sisältää nyt melko hyvin ristinollan pääsäännöt ja pystyy tarkistamaan, milloin toinen on voittanut.
 Ohjelma myös tuottaa listan vapaista paikoista muodossa String[]. Pääohjelma testaa paria ominaisuutta. 
 
+### Testikattavuustilanne 29.5.2020:
+
+![alt_text](https://github.com/puuro-maria/TicTacToe/blob/master/dokumentaatio/kuvat/jacoco_vk3.png)
+
 ## Mitä opin tällä viikolla?
 
 Tällä viikolla ei koettu suuria valaistumisia, mutta ohjelman rakenne tarkentui itselle jälleen. 
