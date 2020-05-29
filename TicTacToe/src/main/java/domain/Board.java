@@ -225,7 +225,7 @@ public class Board {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 if (board[i][j] == 0) {
-                    possibleMoves[p] = i + "," + j;
+                    possibleMoves[p] = (i+1) + "," + (j+1);
                     p++;
                 }
             }

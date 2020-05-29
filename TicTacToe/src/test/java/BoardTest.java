@@ -81,4 +81,15 @@ public class BoardTest {
         String print = winningBoard.printBoard();
         assertEquals("|O|O|O|\n| |X| |\n| | | |\n", print);
     }
+    
+    @Test 
+    public void getPossibleMovesWorks() {
+        String[] posMoves = winningBoard.getPossibleMoves();
+        String posMovesPrint = "";
+        for (int i = 0; i < posMoves.length; i++) {
+            posMovesPrint += posMoves[i] + "\n";
+        }
+        
+        assertTrue(posMovesPrint.contains("2,1\n2,3\n3,1\n3,2\n3,3"));
+    }
 }
