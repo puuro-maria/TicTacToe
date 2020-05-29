@@ -34,6 +34,7 @@ public class BoardTest {
         winningBoard.setCell(1, 1, Cell.CIRCLE);
         winningBoard.setCell(1, 2, Cell.CIRCLE);
         winningBoard.setCell(1, 3, Cell.CIRCLE);
+        winningBoard.setCell(2, 2, Cell.CROSS);
     }
     
 
@@ -76,5 +77,11 @@ public class BoardTest {
         assertTrue(anotherBoard.convertToCell(1) == Cell.CROSS);
         assertTrue(board.convertToCell(0) == Cell.BLANK);
         assertTrue(board.convertToCell(-1) == Cell.CIRCLE);
+    }
+    
+    @Test 
+    public void printBoardWorks() {
+        String print = winningBoard.printBoard();
+        assertEquals("|O|O|O|\n| |X| |\n| | | |\n", print);
     }
 }
