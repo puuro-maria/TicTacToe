@@ -217,4 +217,21 @@ public class Board {
         
         return c;
     }
+    
+    public String[] getPossibleMoves() {
+        String[] possibleMoves = new String[board.length*board.length];
+        int p = 0;
+        
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] == 0) {
+                    possibleMoves[p] = i + "," + j;
+                    p++;
+                }
+            }
+        }
+        
+        return possibleMoves;
+    }
+    
 }
