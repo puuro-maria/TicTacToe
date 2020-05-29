@@ -6,5 +6,6 @@
 | 15.5.2020 | 4 | Määrittelydokumentti, viikkoraportti, minimax-opiskelu |
 | 21.5.2020 | 2 | Luokkarakenteen pohdintaa ja vertailua, projektin alustus Netbeansissa, konfigurointeja |
 | 22.5.2020 | 5 | Luokkien alustus projektiin, Board-luokan ja merkkien alustaminen, konffauksia ja testien kirjoittamista |
+| 29.5.2020 | 5 | Lisätty metodeja ja testejä Board-luokkaan, lähestulkoon valmis luokka |
 | | | |
-| **YHTEENSÄ** | **13** | |
+| **YHTEENSÄ** | **18** | |
