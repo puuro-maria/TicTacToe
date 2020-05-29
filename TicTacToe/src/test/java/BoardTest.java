@@ -20,6 +20,7 @@ public class BoardTest {
     
     private Board board;
     private Board anotherBoard;
+    private Board winningBoard;
     
     public BoardTest() {
     }
@@ -29,6 +30,10 @@ public class BoardTest {
         board = new Board(3);
         anotherBoard = new Board(4);
         anotherBoard.setCell(1, 1, Cell.CROSS);
+        winningBoard = new Board(3);
+        winningBoard.setCell(1, 1, Cell.CIRCLE);
+        winningBoard.setCell(1, 2, Cell.CIRCLE);
+        winningBoard.setCell(1, 3, Cell.CIRCLE);
     }
     
 
@@ -45,5 +50,31 @@ public class BoardTest {
         assertTrue(board.setCell(2, 2, Cell.CROSS));
         assertFalse(board.setCell(2, 2, Cell.CIRCLE));
         assertEquals(Cell.CIRCLE, board.getCell(2,1));
+    }
+    
+    @Test
+    public void CheckWinnerWorks() {
+        assertTrue(winningBoard.checkWinner() == Cell.CIRCLE);
+        
+        Board winningBoardTwo = new Board(3);
+        winningBoardTwo.setCell(1, 1, Cell.CROSS);
+        winningBoardTwo.setCell(2, 1, Cell.CROSS);
+        winningBoardTwo.setCell(3, 1, Cell.CROSS);
+        assertTrue(winningBoardTwo.checkWinner() == Cell.CROSS);
+        
+        Board winningBoardThree = new Board(3);
+        winningBoardThree.setCell(1, 1, Cell.CROSS);
+        winningBoardThree.setCell(2, 2, Cell.CROSS);
+        winningBoardThree.setCell(3, 3, Cell.CROSS);
+        assertTrue(winningBoardThree.checkWinner() == Cell.CROSS);
+        
+        assertTrue(anotherBoard.checkWinner() == null);
+    }
+    
+    @Test
+    public void convertToCellWorks() {
+        assertTrue(anotherBoard.convertToCell(1) == Cell.CROSS);
+        assertTrue(board.convertToCell(0) == Cell.BLANK);
+        assertTrue(board.convertToCell(-1) == Cell.CIRCLE);
     }
 }
