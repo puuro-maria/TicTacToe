@@ -7,7 +7,7 @@ package domain;
 
 public class Board {
     
-    private Cell[][] board;
+    private int[][] board;
     
     /**
      * Constructor sets up the game board and all its cells as blanks
@@ -15,10 +15,10 @@ public class Board {
      * 
      */
     public Board(int x) {
-        this.board = new Cell[x][x];
+        this.board = new int[x][x];
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
-                board[i][j] = Cell.BLANK;
+                board[i][j] = 0;
             }
         }
     }
@@ -31,10 +31,17 @@ public class Board {
      * @return 
      */
     public boolean setCell(int xx, int yy, Cell cell) {
+        int c = 0;
         int x = xx-1;
         int y = yy-1;
+        if (cell == Cell.CIRCLE) {
+            c = -1;
+        }
+        if (cell == Cell.CROSS) {
+            c = 1;
+        }
         if (isFreeCell(xx,yy)) {
-            this.board[x][y] = cell;
+            this.board[x][y] = c;
             return true;
         }
         
@@ -50,7 +57,7 @@ public class Board {
     public boolean isFreeCell(int xx, int yy) {
         int x = xx-1;
         int y = yy-1;
-        if (this.board[x][y] == Cell.BLANK) {
+        if (this.board[x][y] == 0) {
             return true;
         }
         
@@ -66,7 +73,16 @@ public class Board {
     public Cell getCell(int xx, int yy) {
         int x = xx-1;
         int y = yy-1;
-        return this.board[x][y];
+        Cell c;
+        switch (board[x][y]) {
+            case 0:
+                c = Cell.BLANK;
+            case 1:
+                c = Cell.CROSS;
+            case -1:
+                c = Cell.CIRCLE;
+        }
+        return c;
     }
     
     public int getBoardSize() {
