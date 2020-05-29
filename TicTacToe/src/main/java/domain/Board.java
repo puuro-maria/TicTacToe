@@ -112,7 +112,7 @@ public class Board {
             }
         }
         
-        //go through diagonals
+        //go through diagonals ei vielä tarkista muuta kuin vasemmalta keskidiagonaalin, todo
         player = board[0][0];
         for (int i = 0; i < board.length; i++) {
             if (player == 0) {
@@ -125,6 +125,15 @@ public class Board {
         }
         if (player != 0) {
             return convertToCell(player);
+        }
+        
+        //check if there's a tie
+        for (int[] state : board) {
+            for (int i : state) {
+                if (i == 0) {
+                    return null;
+                }
+            }
         }
         
         return null;
@@ -157,6 +166,34 @@ public class Board {
      */
     public int[][] getBoard() {
         return board;
+    }
+    
+    /**
+     * Prints the game board for text UI
+     * @return 
+     */
+    public String printBoard() {
+        String print = "";
+        String cell ="";
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                switch (board[i][j]) {
+                    case -1:
+                        cell = "O";
+                        break;
+                    case 0:
+                        cell = " ";
+                        break;
+                    case 1:
+                        cell = "X";
+                        break;
+                }
+                print += "|" + cell;
+            }
+            print += "|\n";
+        }
+        
+        return print;
     }
     
     /**

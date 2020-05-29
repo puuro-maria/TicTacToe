@@ -15,6 +15,7 @@ public class Main {
         Board board = new Board(3);
         board.setCell(1, 1, Cell.CIRCLE);
         System.out.println(board.checkWinner());
+        System.out.println(board.printBoard());
     }
     
 }
