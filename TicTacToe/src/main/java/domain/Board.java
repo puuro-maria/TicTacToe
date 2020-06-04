@@ -141,8 +141,8 @@ public class Board {
     
     /**
      * This getter returns the cell value in a specified cell
-     * @param x row of the board
-     * @param y column of the board
+     * @param xx row of the board
+     * @param yy column of the board
      * @return Cell - blank, circle or cross
      */
     public Cell getCell(int xx, int yy) {
@@ -218,15 +218,13 @@ public class Board {
         return c;
     }
     
-    public String[] getPossibleMoves() {
-        String[] possibleMoves = new String[board.length*board.length];
-        int p = 0;
+    public int[][] getPossibleMoves() {
+        int[][] possibleMoves = new int[board.length][board[0].length];
         
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 if (board[i][j] == 0) {
-                    possibleMoves[p] = (i+1) + "," + (j+1);
-                    p++;
+                    possibleMoves[i][j] = 1;
                 }
             }
         }
