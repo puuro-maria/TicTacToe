@@ -10,20 +10,15 @@ public class AI {
     public static Cell player = Cell.CIRCLE;
     public static Cell ai = Cell.CROSS;
     public static int cOptimalPoints;
-    public static int maxDepth = 10;
+    public static int maxDepth = 20;
     public static int depth = 0;
      /**
       * minimax-method
       * @param board
-     * @param isMax parameter defines whether it's the turn of minimizing or maximizing player
+      * @param isMax parameter defines whether it's the turn of minimizing or maximizing player
       * @return optimal points for the AI
       */
     public static int minimax(Board board, boolean isMax) {
-        
-        /*if (depth == maxDepth) {
-            return cOptimalPoints;
-        }*/
-        depth++;
         
         Cell turn;
         if (isMax == true) {
@@ -31,17 +26,13 @@ public class AI {
         } else turn = player;
         
         Cell winner = board.checkWinner();
-        int points;
         if (winner != null) { 
             if (winner == player) {
-                points = -1;
-                return points;
+                return -1;
             } else if (winner == Cell.BLANK) {
-                points = 0;
-                return points;
+                return 0;
             } else {
-                points = 1;
-                return points;
+                return 1;
             }
         }
         
@@ -58,36 +49,36 @@ public class AI {
             }
         }*/
         
-        int bestPoints;
+        int bestPoints = 0;
         
         if (isMax == false) {
-            bestPoints = 100000;
-        } else {
-            bestPoints = -100000;
-        }
+            bestPoints = 0;
+        } else if (isMax == true) {
+            bestPoints = 0;
+        } 
         
        // cOptimalPoints = bestPoints;
-        int currentPoints;
+        int currentPoints = 0;
         
         for (int r = 0; r < board.getBoardSize(); r++) {
             for (int c = 0; c < board.getBoardSize(); c++) {
                 if (board.getPossibleMoves()[r][c] == 1) {
                     board.setCell(r, c, turn);
-                    if (isMax == true) {
+                    if (isMax == true && depth <= maxDepth) {
                         currentPoints = minimax(board, false);
-                    } else {
+                    } else if (isMax == false && depth <= maxDepth) {
                         currentPoints = minimax(board, true);
-                    }
+                    } 
                     board.setCell(r, c, Cell.BLANK);
-                    if (isMax == true & currentPoints > bestPoints) {
+                    if ((isMax == true) & (currentPoints > bestPoints)) {
                         bestPoints = currentPoints;
-                    } else if (isMax == false & currentPoints < bestPoints) {
+                    } else if ((isMax == false) & (currentPoints < bestPoints)) {
                         bestPoints = currentPoints;
                     }
-                }
+                } 
             }
         }
-        
+        System.out.println(bestPoints);
         return bestPoints;
     }
     
@@ -115,7 +106,7 @@ public class AI {
                 }
             }
         }
-        System.out.println("Paras move" + bestMove);
+        System.out.println("AI:n paras siirto: " + bestMove);
         return bestMove;
     }
     
