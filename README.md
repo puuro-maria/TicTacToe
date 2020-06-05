@@ -16,6 +16,8 @@ Pelissä on kaksi pelaajaa - risti ja nolla. Peliruudukko on perinteisesti 3x3 -
 
 ## Viikkoraportit
 
+[Viikon 4 raportti](https://github.com/puuro-maria/TicTacToe/blob/master/dokumentaatio/viikkoraportit/viikko4.md)
+
 [Viikon 3 raportti](https://github.com/puuro-maria/TicTacToe/blob/master/dokumentaatio/viikkoraportit/viikko3.md)
 
 [Viikon 2 raportti](https://github.com/puuro-maria/TicTacToe/blob/master/dokumentaatio/viikkoraportit/viikko2.md)
