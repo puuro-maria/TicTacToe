@@ -30,10 +30,9 @@ public class Board {
      * @param cell
      * @return 
      */
-    public boolean setCell(int xx, int yy, Cell cell) {
+    public boolean setCell(int x, int y, Cell cell) {
         int c = 0;
-        int x = xx-1;
-        int y = yy-1;
+
         if (cell == Cell.CROSS) {
             c = 1;
         }
@@ -42,8 +41,9 @@ public class Board {
         }
         if (cell == Cell.BLANK) {
             c = 0;
+            this.board[x][y] = c;
         }
-        if (isFreeCell(xx,yy)) {
+        if (isFreeCell(x,y)) {
             this.board[x][y] = c;
             return true;
         }
@@ -57,9 +57,7 @@ public class Board {
      * @param y
      * @return boolean
      */
-    public boolean isFreeCell(int xx, int yy) {
-        int x = xx-1;
-        int y = yy-1;
+    public boolean isFreeCell(int x, int y) {
         if (this.board[x][y] == 0) {
             return true;
         }
@@ -69,7 +67,7 @@ public class Board {
     
     /**
      * This method is to check whether the game has been won or tied
-     * @return Cell (CROSS, CIRCLE or null in case of a tie)
+     * @return Cell (CROSS, CIRCLE or BLANK in case of a tie)
      */
     public Cell checkWinner() {
 
@@ -145,9 +143,7 @@ public class Board {
      * @param yy column of the board
      * @return Cell - blank, circle or cross
      */
-    public Cell getCell(int xx, int yy) {
-        int x = xx-1;
-        int y = yy-1;
+    public Cell getCell(int x, int y) {
         Cell c = convertToCell(board[x][y]);
         return c;
     }
