@@ -36,19 +36,6 @@ public class AI {
             }
         }
         
-        /*int aiCount = 0;
-        int playerCount = 0;
-        
-        for (int i = 0; i < board.getBoardSize(); i++) {
-            for (int j = 0; j < board.getBoardSize(); j++) {
-                if (board.getCell(i, j) == player) {
-                    playerCount++;
-                } else if (board.getCell(i, j) == ai) {
-                    aiCount++;
-                }
-            }
-        }*/
-        
         int bestPoints = 0;
         
         if (isMax == false) {
@@ -57,7 +44,6 @@ public class AI {
             bestPoints = 0;
         } 
         
-       // cOptimalPoints = bestPoints;
         int currentPoints = 0;
         
         for (int r = 0; r < board.getBoardSize(); r++) {
