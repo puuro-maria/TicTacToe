@@ -9,7 +9,6 @@ public class AI {
     
     public static Cell player = Cell.CIRCLE;
     public static Cell ai = Cell.CROSS;
-    public static int cOptimalPoints;
     public static int maxDepth = 20;
     public static int depth = 0;
      /**
@@ -64,7 +63,7 @@ public class AI {
                 } 
             }
         }
-        System.out.println(bestPoints);
+
         return bestPoints;
     }
     
