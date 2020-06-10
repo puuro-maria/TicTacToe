@@ -19,6 +19,7 @@ public class AI {
       */
     public static int minimax(Board board, boolean isMax) {
         
+        depth++;
         Cell turn;
         if (isMax == true) {
             turn = ai;

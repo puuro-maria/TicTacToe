@@ -51,20 +51,35 @@ public class Controls {
         setCell(x, y, Cell.CROSS);
     }
     
+    /**
+     * Checks whether game is over
+     * @return boolean
+     */
     public boolean gameWon() {
         if (this.board.checkWinner() != null) {
             return true;
         } else return false;
     }
     
+    /**
+     * Empties the game board for the next game
+     */
     public void gameOver() {
         this.board = null;
     }
     
+    /**
+     * Prints the game board for the player to view
+     * @return String
+     */
     public String printBoard() {
         return this.board.printBoard();
     }
     
+    /**
+     * Returns the winning player
+     * @return Cell
+     */
     public Cell whoWon() {
         return this.board.checkWinner();
     }
