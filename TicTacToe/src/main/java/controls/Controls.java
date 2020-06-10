@@ -58,7 +58,6 @@ public class Controls {
     }
     
     public void gameOver() {
-        ai.resetcOptimalPoints();
         this.board = null;
     }
     

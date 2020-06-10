@@ -96,8 +96,6 @@ public class AI {
         return bestMove;
     }
     
-    public void resetcOptimalPoints() {
-        this.cOptimalPoints = 0;
-    }
+
     
 }
