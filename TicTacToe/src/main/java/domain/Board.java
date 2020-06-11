@@ -125,6 +125,54 @@ public class Board {
             return convertToCell(player);
         }
         
+        //diagonals in other direction
+        int row = 0;
+        int col;
+        
+        while (row <= getBoardSize()-1) {
+            int[] diagonal = new int[getBoardSize()];
+            col = 0;
+            int tempR = row;
+            int i = 0;
+            while (tempR >= 0) {
+                if (board[tempR][col] == player && player != 0) {
+                    diagonal[i] = board[tempR][col];
+                    tempR--;
+                    col++;
+                    i++;
+                } else break;
+            }
+            if (diagonal[getBoardSize()-1] == player && player != 0) {
+                System.out.println(diagonal);
+                return convertToCell(player);
+            } else {
+                row++;
+            }
+        }
+        
+        col = 1;
+        while (col <= getBoardSize()-1) {
+            int[] diagonal = new int[getBoardSize()];
+            int tempC = col;
+            int i = 0;
+            row = getBoardSize()-1;
+            while (tempC <= getBoardSize()-1) {
+                if ( board[row][tempC] == player && player != 0) {
+                    diagonal[i] = board[row][tempC];
+                    row--;
+                    tempC++;
+                    i++;
+                } else break;
+            }
+            if (diagonal[getBoardSize()-1] == player && player != 0) {
+                System.out.println(diagonal);
+                return convertToCell(player);
+            } else {
+                col++;
+            }
+        }
+        
+        
         //check if there's a tie
         for (int[] state : board) {
             for (int i : state) {
