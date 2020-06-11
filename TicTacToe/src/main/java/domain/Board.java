@@ -139,8 +139,8 @@ public class Board {
     
     /**
      * This getter returns the cell value in a specified cell
-     * @param xx row of the board
-     * @param yy column of the board
+     * @param x row of the board
+     * @param y column of the board
      * @return Cell - blank, circle or cross
      */
     public Cell getCell(int x, int y) {
