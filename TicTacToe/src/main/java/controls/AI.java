@@ -36,12 +36,12 @@ public class AI {
             }
         }
         
-        int bestPoints = 0;
+        int bestPoints;
         
         if (isMax == false) {
-            bestPoints = -100;
-        } else if (isMax == true) {
             bestPoints = 100;
+        } else {
+            bestPoints = -100;
         } 
         
         int currentPoints = 0;
