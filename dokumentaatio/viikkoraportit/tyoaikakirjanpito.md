@@ -9,5 +9,8 @@
 | 29.5.2020 | 5 | Lisätty metodeja ja testejä Board-luokkaan, lähestulkoon valmis luokka |
 | 4.6.2020 | 5 | Alustettu minimax-algoritmia ja Board-luokkaa viilattu |
 | 5.6.2020 | 8 | Tekstikäyttöliittymä ja sovelluslogiikka lähes kunnossa, minimax ei vielä toimi täysin |
+| 10.6.2020 | 2 | Korjailua |
+| 11.6.2020 | 5 | Minimax-algoritmiin lisätty alfa-beeta-karsinta, bugikorjauksia |
+| 12.6.2020 | 5 | Dokumentaatiota, keskustelu ohjaajan kanssa, koodin tarkastelua ja checkstyle-korjauksia |
 | | | |
-| **YHTEENSÄ** | **31** | |
+| **YHTEENSÄ** | **43** | |
