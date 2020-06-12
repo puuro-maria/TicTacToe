@@ -17,7 +17,7 @@ public class AI {
       * @param isMax parameter defines whether it's the turn of minimizing or maximizing player
       * @return optimal points for the AI
       */
-    public static int minimax(Board board, boolean isMax) {
+    public static int minimax(Board board, boolean isMax, int alpha, int beta) {
         
         depth++;
         Cell turn;
@@ -39,9 +39,9 @@ public class AI {
         int bestPoints = 0;
         
         if (isMax == false) {
-            bestPoints = 0;
+            bestPoints = -100;
         } else if (isMax == true) {
-            bestPoints = 0;
+            bestPoints = 100;
         } 
         
         int currentPoints = 0;
@@ -51,15 +51,29 @@ public class AI {
                 if (board.getPossibleMoves()[r][c] == 1) {
                     board.setCell(r, c, turn);
                     if (isMax == true && depth <= maxDepth) {
-                        currentPoints = minimax(board, false);
+                        currentPoints = minimax(board, false, -100, 100);
                     } else if (isMax == false && depth <= maxDepth) {
-                        currentPoints = minimax(board, true);
+                        currentPoints = minimax(board, true, -100, 100);
                     } 
                     board.setCell(r, c, Cell.BLANK);
                     if ((isMax == true) & (currentPoints > bestPoints)) {
                         bestPoints = currentPoints;
                     } else if ((isMax == false) & (currentPoints < bestPoints)) {
                         bestPoints = currentPoints;
+                    }
+                    
+                    //alpha-beta pruning
+                    if (isMax == true & bestPoints >= alpha) {
+                        alpha = bestPoints;
+                    }
+                    if (isMax == true & beta <= alpha) {
+                        break;
+                    }
+                    if(isMax == false & bestPoints <= beta) {
+                        beta = bestPoints;
+                    }
+                    if (isMax == false & beta <= alpha) {
+                        break;
                     }
                 } 
             }
@@ -83,7 +97,7 @@ public class AI {
             for (int j = 0; j < possibleMoves[i].length; j++) {
                 if (possibleMoves[i][j] == 1) {
                     board.setCell(i, j, ai);
-                    int points = minimax(board, true); // AI is always maximizing player
+                    int points = minimax(board, true, -100, 100); // AI is always maximizing player
                     board.setCell(i, j, Cell.BLANK);
                     if (points > bestPoints) {
                         bestPoints = points;
