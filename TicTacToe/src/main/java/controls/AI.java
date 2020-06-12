@@ -23,7 +23,9 @@ public class AI {
         Cell turn;
         if (isMax == true) {
             turn = ai;
-        } else turn = player;
+        } else {
+            turn = player;
+        }
         
         Cell winner = board.checkWinner();
         if (winner != null) { 
@@ -46,6 +48,7 @@ public class AI {
         
         int currentPoints = 0;
         
+        //recursion
         for (int r = 0; r < board.getBoardSize(); r++) {
             for (int c = 0; c < board.getBoardSize(); c++) {
                 if (board.getPossibleMoves()[r][c] == 1) {
@@ -69,7 +72,7 @@ public class AI {
                     if (isMax == true & beta <= alpha) {
                         break;
                     }
-                    if(isMax == false & bestPoints <= beta) {
+                    if (isMax == false & bestPoints <= beta) {
                         beta = bestPoints;
                     }
                     if (isMax == false & beta <= alpha) {

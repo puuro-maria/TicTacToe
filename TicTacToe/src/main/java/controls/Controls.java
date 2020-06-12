@@ -37,7 +37,9 @@ public class Controls {
         if (this.board.setCell(x, y, cell)) {
             this.board.setCell(x, y, cell);
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
     
     /**
@@ -58,7 +60,9 @@ public class Controls {
     public boolean gameWon() {
         if (this.board.checkWinner() != null) {
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
     
     /**

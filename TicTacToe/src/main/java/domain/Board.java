@@ -43,7 +43,7 @@ public class Board {
             c = 0;
             this.board[x][y] = c;
         }
-        if (isFreeCell(x,y)) {
+        if (isFreeCell(x, y)) {
             this.board[x][y] = c;
             return true;
         }
@@ -88,7 +88,7 @@ public class Board {
                 }
             }
             if (player != 0) {
-                    return convertToCell(player);
+                return convertToCell(player);
             }
         }
         
@@ -129,7 +129,7 @@ public class Board {
         int row = 0;
         int col;
         
-        while (row <= getBoardSize()-1) {
+        while (row <= getBoardSize() - 1) {
             int[] diagonal = new int[getBoardSize()];
             col = 0;
             int tempR = row;
@@ -140,9 +140,11 @@ public class Board {
                     tempR--;
                     col++;
                     i++;
-                } else break;
+                } else {
+                    break;
+                }
             }
-            if (diagonal[getBoardSize()-1] == player && player != 0) {
+            if (diagonal[getBoardSize() - 1] == player && player != 0) {
                 System.out.println(diagonal);
                 return convertToCell(player);
             } else {
@@ -151,20 +153,22 @@ public class Board {
         }
         
         col = 1;
-        while (col <= getBoardSize()-1) {
+        while (col <= getBoardSize() - 1) {
             int[] diagonal = new int[getBoardSize()];
             int tempC = col;
             int i = 0;
-            row = getBoardSize()-1;
-            while (tempC <= getBoardSize()-1) {
-                if ( board[row][tempC] == player && player != 0) {
+            row = getBoardSize() - 1;
+            while (tempC <= getBoardSize() - 1) {
+                if (board[row][tempC] == player && player != 0) {
                     diagonal[i] = board[row][tempC];
                     row--;
                     tempC++;
                     i++;
-                } else break;
+                } else {
+                    break;
+                }
             }
-            if (diagonal[getBoardSize()-1] == player && player != 0) {
+            if (diagonal[getBoardSize() - 1] == player && player != 0) {
                 System.out.println(diagonal);
                 return convertToCell(player);
             } else {
@@ -218,7 +222,7 @@ public class Board {
      */
     public String printBoard() {
         String print = "";
-        String cell ="";
+        String cell = "";
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 switch (board[i][j]) {
