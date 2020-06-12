@@ -1,6 +1,6 @@
-# Toteutusdokumentti
+# Toteutusdokumentti :wrench:
 
-## Ohjelman rakenne
+## Ohjelman rakenne :house:
 
 ### Pakkausrakenne
 
@@ -22,3 +22,8 @@ Minimax on esitetty pseudokoodina määrittelydokumentissa.
 Controls-luokka sisältää sovelluslogiikan, jotta käyttöliittymässä ei tarvitse kutsua useita eri luokkia ja käyttöliittymä on eriytetty hyvin tietorakenteista.
 
 Ui-pakkaus sisältää tekstikäyttöliittymän ja main-luokan.
+
+## Aikavaativuus :hourglass_flowing_sand:
+
+### Minimax-algoritmin aikavaativuus
+
