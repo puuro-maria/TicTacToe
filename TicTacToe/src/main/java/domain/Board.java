@@ -30,21 +30,13 @@ public class Board {
      * @param cell
      * @return 
      */
-    public boolean setCell(int x, int y, Cell cell) {
-        int c = 0;
+    public boolean setCell(int x, int y, int cell) {
 
-        if (cell == Cell.CROSS) {
-            c = 1;
-        }
-        if (cell == Cell.CIRCLE) {
-            c = (-1);
-        }
-        if (cell == Cell.BLANK) {
-            c = 0;
-            this.board[x][y] = c;
+        if (cell == 0) {
+            this.board[x][y] = cell;
         }
         if (isFreeCell(x, y)) {
-            this.board[x][y] = c;
+            this.board[x][y] = cell;
             return true;
         }
         
@@ -69,7 +61,7 @@ public class Board {
      * This method is to check whether the game has been won or tied
      * @return Cell (CROSS, CIRCLE or BLANK in case of a tie)
      */
-    public Cell checkWinner() {
+    public int checkWinner() {
 
         int player;
 
@@ -88,7 +80,7 @@ public class Board {
                 }
             }
             if (player != 0) {
-                return convertToCell(player);
+                return player;
             }
         }
         
@@ -106,7 +98,7 @@ public class Board {
                 }
             }
             if (player != 0) {
-                return convertToCell(player);
+                return player;
             }
         }
         
@@ -122,7 +114,7 @@ public class Board {
             }
         }
         if (player != 0) {
-            return convertToCell(player);
+            return player;
         }
         
         //diagonals in other direction
@@ -146,7 +138,7 @@ public class Board {
             }
             if (diagonal[getBoardSize() - 1] == player && player != 0) {
                 System.out.println(diagonal);
-                return convertToCell(player);
+                return player;
             } else {
                 row++;
             }
@@ -170,7 +162,7 @@ public class Board {
             }
             if (diagonal[getBoardSize() - 1] == player && player != 0) {
                 System.out.println(diagonal);
-                return convertToCell(player);
+                return player;
             } else {
                 col++;
             }
@@ -181,12 +173,12 @@ public class Board {
         for (int[] state : board) {
             for (int i : state) {
                 if (i == 0) {
-                    return null;
+                    return 0;
                 }
             }
         }
         
-        return null;
+        return 0;
     }
     
     /**
@@ -195,9 +187,8 @@ public class Board {
      * @param y column of the board
      * @return Cell - blank, circle or cross
      */
-    public Cell getCell(int x, int y) {
-        Cell c = convertToCell(board[x][y]);
-        return c;
+    public int getCell(int x, int y) {
+        return board[x][y];
     }
     
     /**
@@ -242,42 +233,6 @@ public class Board {
         }
         
         return print;
-    }
-    
-    /**
-     * Converts board value (-1, 0, 1) to its enum-value
-     * @param value
-     * @return Cell
-     */
-    public Cell convertToCell(int value) {
-        Cell c = Cell.BLANK;
-        switch (value) {
-            case -1:
-                c = Cell.CIRCLE;
-                break;
-            case 0:
-                c = Cell.BLANK;
-                break;
-            case 1:
-                c = Cell.CROSS;
-                break;
-        }
-        
-        return c;
-    }
-    
-    public int[][] getPossibleMoves() {
-        int[][] possibleMoves = new int[board.length][board[0].length];
-        
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j] == 0) {
-                    possibleMoves[i][j] = 1;
-                }
-            }
-        }
-        
-        return possibleMoves;
     }
     
 }

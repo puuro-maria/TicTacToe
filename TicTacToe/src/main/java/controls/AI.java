@@ -9,7 +9,7 @@ public class AI {
     
     public static Cell player = Cell.CIRCLE;
     public static Cell ai = Cell.CROSS;
-    public static int maxDepth = 20;
+    public static int maxDepth = 2000;
     public static int depth = 0;
      /**
       * minimax-method
@@ -66,7 +66,7 @@ public class AI {
                     }
                     
                     //alpha-beta pruning
-                    if (isMax == true & bestPoints >= alpha) {
+                    /*if (isMax == true & bestPoints >= alpha) {
                         alpha = bestPoints;
                     }
                     if (isMax == true & beta <= alpha) {
@@ -77,7 +77,7 @@ public class AI {
                     }
                     if (isMax == false & beta <= alpha) {
                         break;
-                    }
+                    }*/
                 } 
             }
         }
