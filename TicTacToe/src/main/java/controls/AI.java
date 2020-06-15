@@ -20,18 +20,18 @@ public class AI {
     public static int minimax(Board board, boolean isMax, int alpha, int beta) {
         
         depth++;
-        Cell turn;
+        int turn;
         if (isMax == true) {
-            turn = ai;
+            turn = 1;
         } else {
-            turn = player;
+            turn = -1;
         }
         
-        Cell winner = board.checkWinner();
-        if (winner != null) { 
-            if (winner == player) {
+        int winner = board.checkWinner();
+        if (winner != 0) { 
+            if (winner == -1) {
                 return -1;
-            } else if (winner == Cell.BLANK) {
+            } else if (winner == 0) {
                 return 0;
             } else {
                 return 1;
@@ -51,14 +51,14 @@ public class AI {
         //recursion
         for (int r = 0; r < board.getBoardSize(); r++) {
             for (int c = 0; c < board.getBoardSize(); c++) {
-                if (board.getPossibleMoves()[r][c] == 1) {
+                if (board.getCell(r, c) == 0) {
                     board.setCell(r, c, turn);
                     if (isMax == true && depth <= maxDepth) {
                         currentPoints = minimax(board, false, -100, 100);
                     } else if (isMax == false && depth <= maxDepth) {
                         currentPoints = minimax(board, true, -100, 100);
                     } 
-                    board.setCell(r, c, Cell.BLANK);
+                    board.setCell(r, c, 0);
                     if ((isMax == true) & (currentPoints > bestPoints)) {
                         bestPoints = currentPoints;
                     } else if ((isMax == false) & (currentPoints < bestPoints)) {
@@ -93,15 +93,14 @@ public class AI {
     public static String bestMove(Board board) {
         String bestMove = null;
         int bestPoints = -1000;
-        int[][] possibleMoves = board.getPossibleMoves();
         depth = 0;
         
-        for (int i = 0; i < possibleMoves.length; i++) {
-            for (int j = 0; j < possibleMoves[i].length; j++) {
-                if (possibleMoves[i][j] == 1) {
-                    board.setCell(i, j, ai);
+        for (int i = 0; i < board.getBoardSize(); i++) {
+            for (int j = 0; j < board.getBoardSize(); j++) {
+                if (board.getCell(i, j) == 1) {
+                    board.setCell(i, j, 1);
                     int points = minimax(board, true, -100, 100); // AI is always maximizing player
-                    board.setCell(i, j, Cell.BLANK);
+                    board.setCell(i, j, 0);
                     if (points > bestPoints) {
                         bestPoints = points;
                         bestMove = Integer.toString(i) + "," + Integer.toString(j);

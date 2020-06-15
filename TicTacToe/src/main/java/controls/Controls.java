@@ -33,7 +33,7 @@ public class Controls {
      * @param cell
      * @return boolean
      */
-    public boolean setCell(int x, int y, Cell cell) {
+    public boolean setCell(int x, int y, int cell) {
         if (this.board.setCell(x, y, cell)) {
             this.board.setCell(x, y, cell);
             return true;
@@ -50,7 +50,7 @@ public class Controls {
         String[] move = ai.bestMove(this.board).split(",");
         int x = Integer.parseInt(move[0]);
         int y = Integer.parseInt(move[1]);
-        setCell(x, y, Cell.CROSS);
+        setCell(x, y, 1);
     }
     
     /**
@@ -58,7 +58,7 @@ public class Controls {
      * @return boolean
      */
     public boolean gameWon() {
-        if (this.board.checkWinner() != null) {
+        if (this.board.checkWinner() != 0) {
             return true;
         } else {
             return false;
@@ -84,7 +84,7 @@ public class Controls {
      * Returns the winning player
      * @return Cell
      */
-    public Cell whoWon() {
+    public int whoWon() {
         return this.board.checkWinner();
     }
     
