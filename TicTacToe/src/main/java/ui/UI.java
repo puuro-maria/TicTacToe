@@ -1,7 +1,6 @@
 package ui;
 
 import controls.Controls;
-import domain.Cell;
 import java.util.Scanner;
 
 /**
@@ -34,7 +33,7 @@ public class UI {
         String[] coordinate = sc.nextLine().split(",");
         int x = Integer.parseInt(coordinate[0]);
         int y = Integer.parseInt(coordinate[1]);
-        controls.setCell(x, y, Cell.CIRCLE);
+        controls.setCell(x, y, -10);
         System.out.println(controls.printBoard());
         if (controls.gameWon() == false) {
             controls.aiTurn();

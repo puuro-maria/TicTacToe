@@ -3,7 +3,6 @@
  */
 
 import domain.Board;
-import domain.Cell;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,12 +25,12 @@ public class BoardTest {
     public void setUp() {
         board = new Board(3);
         anotherBoard = new Board(4);
-        anotherBoard.setCell(1, 1, Cell.CROSS);
+        anotherBoard.setCell(1, 1, 1);
         winningBoard = new Board(3);
-        winningBoard.setCell(0, 0, Cell.CIRCLE);
-        winningBoard.setCell(0, 1, Cell.CIRCLE);
-        winningBoard.setCell(0, 2, Cell.CIRCLE);
-        winningBoard.setCell(1, 1, Cell.CROSS);
+        winningBoard.setCell(0, 0, -10);
+        winningBoard.setCell(0, 1, -10);
+        winningBoard.setCell(0, 2, -10);
+        winningBoard.setCell(1, 1, 1);
     }
     
 
@@ -42,40 +41,34 @@ public class BoardTest {
     
     @Test
     public void setCellAndGetCellWork() {
-        assertEquals(Cell.BLANK, board.getCell(0, 0));
-        assertEquals(Cell.CROSS, anotherBoard.getCell(1,1));
-        board.setCell(1, 0, Cell.CIRCLE);
-        assertTrue(board.setCell(1, 1, Cell.CROSS));
-        assertFalse(board.setCell(1, 1, Cell.CIRCLE));
-        assertEquals(Cell.CIRCLE, board.getCell(1,0));
+        assertEquals(0, board.getCell(0, 0));
+        assertEquals(1, anotherBoard.getCell(1,1));
+        board.setCell(1, 0, -10);
+        assertTrue(board.setCell(1, 1, 1));
+        assertFalse(board.setCell(1, 1, -10));
+        assertEquals(-10, board.getCell(1,0));
     }
     
     @Test
     public void CheckWinnerWorks() {
-        assertTrue(winningBoard.checkWinner() == Cell.CIRCLE);
+        assertTrue(winningBoard.checkWinner() == -10);
         
         Board winningBoardTwo = new Board(3);
-        winningBoardTwo.setCell(0, 0, Cell.CROSS);
-        assertFalse(winningBoardTwo.checkWinner() == Cell.CROSS);
-        winningBoardTwo.setCell(1, 0, Cell.CROSS);
-        winningBoardTwo.setCell(2, 0, Cell.CROSS);
-        assertTrue(winningBoardTwo.checkWinner() == Cell.CROSS);
+        winningBoardTwo.setCell(0, 0, 1);
+        assertFalse(winningBoardTwo.checkWinner() == 1);
+        winningBoardTwo.setCell(1, 0, 1);
+        winningBoardTwo.setCell(2, 0, 1);
+        assertTrue(winningBoardTwo.checkWinner() == 1);
         
         Board winningBoardThree = new Board(3);
-        winningBoardThree.setCell(0, 0, Cell.CROSS);
-        winningBoardThree.setCell(1, 1, Cell.CROSS);
-        winningBoardThree.setCell(2, 2, Cell.CROSS);
-        assertTrue(winningBoardThree.checkWinner() == Cell.CROSS);
+        winningBoardThree.setCell(0, 0, 1);
+        winningBoardThree.setCell(1, 1, 1);
+        winningBoardThree.setCell(2, 2, 1);
+        assertTrue(winningBoardThree.checkWinner() == 1);
         
-        assertTrue(anotherBoard.checkWinner() == null);
+        assertTrue(anotherBoard.checkWinner() == 0);
     }
     
-    @Test
-    public void convertToCellWorks() {
-        assertTrue(anotherBoard.convertToCell(1) == Cell.CROSS);
-        assertTrue(board.convertToCell(0) == Cell.BLANK);
-        assertTrue(board.convertToCell(-1) == Cell.CIRCLE);
-    }
     
     @Test 
     public void printBoardWorks() {
@@ -83,18 +76,4 @@ public class BoardTest {
         assertEquals("|O|O|O|\n| |X| |\n| | | |\n", print);
     }
     
-    @Test 
-    public void getPossibleMovesWorks() {
-        int[][] posMoves = winningBoard.getPossibleMoves();
-        String posMovesPrint = "";
-        for (int i = 0; i < posMoves.length; i++) {
-            for (int j = 0; j < posMoves[i].length; j++) { 
-                if (posMoves[i][j] == 1)
-                    posMovesPrint += Integer.toString(i) + ", " + Integer.toString(j) + "\n";
-            }
-        } 
-        
-        assertTrue(posMovesPrint.contains("1, 0\n1, 2\n2, 0\n2, 1\n2, 2"));
-        assertFalse(posMovesPrint.contains("0, 0"));
-    }
 }

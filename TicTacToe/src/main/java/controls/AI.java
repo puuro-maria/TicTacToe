@@ -7,8 +7,6 @@ import domain.*;
  */
 public class AI {
     
-    public static Cell player = Cell.CIRCLE;
-    public static Cell ai = Cell.CROSS;
     public static int maxDepth = 2000;
     public static int depth = 0;
      /**
@@ -24,17 +22,16 @@ public class AI {
         if (isMax == true) {
             turn = 1;
         } else {
-            turn = -1;
+            turn = -10;
         }
         
         int winner = board.checkWinner();
         if (winner != 0) { 
-            if (winner == -1) {
-                return -1;
-            } else if (winner == 0) {
-                return 0;
-            } else {
-                return 1;
+            switch (winner) {
+                case -10:
+                    return -10;
+                case 1:
+                    return 1;
             }
         }
         
@@ -97,7 +94,7 @@ public class AI {
         
         for (int i = 0; i < board.getBoardSize(); i++) {
             for (int j = 0; j < board.getBoardSize(); j++) {
-                if (board.getCell(i, j) == 1) {
+                if (board.getCell(i, j) == 0) {
                     board.setCell(i, j, 1);
                     int points = minimax(board, true, -100, 100); // AI is always maximizing player
                     board.setCell(i, j, 0);

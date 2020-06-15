@@ -217,7 +217,7 @@ public class Board {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 switch (board[i][j]) {
-                    case -1:
+                    case -10:
                         cell = "O";
                         break;
                     case 0:
