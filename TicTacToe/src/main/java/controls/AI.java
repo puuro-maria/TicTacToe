@@ -7,12 +7,14 @@ import domain.*;
  */
 public class AI {
     
-    public static int maxDepth = 2000;
+    public static int maxDepth = 20;
     public static int depth = 0;
      /**
       * minimax-method
       * @param board
       * @param isMax parameter defines whether it's the turn of minimizing or maximizing player
+     * @param alpha
+     * @param beta
       * @return optimal points for the AI
       */
     public static int minimax(Board board, boolean isMax, int alpha, int beta) {
@@ -25,6 +27,16 @@ public class AI {
             turn = -10;
         }
         
+        // jos syvyysmaksimi tulee vastaan tai jos peli on voitettu niin palauta best position
+        if (depth == maxDepth) {
+
+        } 
+        
+        if (board.getWinner() != 0) {
+
+        }
+        
+        /*
         int winner = board.checkWinner();
         if (winner != 0) { 
             switch (winner) {
@@ -33,7 +45,7 @@ public class AI {
                 case 1:
                     return 1;
             }
-        }
+        }*/
         
         int bestPoints;
         
@@ -50,9 +62,10 @@ public class AI {
             for (int c = 0; c < board.getBoardSize(); c++) {
                 if (board.getCell(r, c) == 0) {
                     board.setCell(r, c, turn);
-                    if (isMax == true && depth <= maxDepth) {
+                    // jos tämä ratkaisee pelin pelaajan (turn) eduksi niin return. Kutsu positionValuea äläkä enää jatka
+                    if (isMax == true) {
                         currentPoints = minimax(board, false, -100, 100);
-                    } else if (isMax == false && depth <= maxDepth) {
+                    } else if (isMax == false) {
                         currentPoints = minimax(board, true, -100, 100);
                     } 
                     board.setCell(r, c, 0);
@@ -62,8 +75,8 @@ public class AI {
                         bestPoints = currentPoints;
                     }
                     
-                    //alpha-beta pruning
-                    /*if (isMax == true & bestPoints >= alpha) {
+                    /*//alpha-beta pruning
+                    if (isMax == true & bestPoints >= alpha) {
                         alpha = bestPoints;
                     }
                     if (isMax == true & beta <= alpha) {

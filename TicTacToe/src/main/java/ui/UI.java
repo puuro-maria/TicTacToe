@@ -15,7 +15,9 @@ public class UI {
     public void start() {
         System.out.println("Syötä ristikon koko: ");
         int size = Integer.parseInt(sc.nextLine());
-        controls.setUpGame(size);
+        System.out.println("Syötä voittorivin pituus");
+        int need = Integer.parseInt(sc.nextLine());
+        controls.setUpGame(size, need);
         System.out.println(controls.printBoard());
         
         while (controls.gameWon() == false) {

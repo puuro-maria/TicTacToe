@@ -12,16 +12,18 @@ import domain.*;
 public class Controls {
     
     private Board board;
-    private AI ai = new AI();
+    private int need;
 
     
     /**
      * Sets up game board 
      * @param size of the board
+     * @param need
      * @return game board
      */
-    public Board setUpGame(int size) {
-        this.board = new Board(size);
+    public Board setUpGame(int size, int need) {
+        this.need = need;
+        this.board = new Board(size, need);
         
         return this.board;
     }
@@ -44,10 +46,9 @@ public class Controls {
     
     /**
      * AI sets cell to board
-     * @param board
      */
     public void aiTurn() {
-        String[] move = ai.bestMove(this.board).split(",");
+        String[] move = AI.bestMove(this.board).split(",");
         int x = Integer.parseInt(move[0]);
         int y = Integer.parseInt(move[1]);
         setCell(x, y, 1);
@@ -58,7 +59,7 @@ public class Controls {
      * @return boolean
      */
     public boolean gameWon() {
-        if (this.board.checkWinner() != 0) {
+        if (this.board.getWinner() != 0) {
             return true;
         } else {
             return false;
@@ -85,7 +86,7 @@ public class Controls {
      * @return Cell
      */
     public int whoWon() {
-        return this.board.checkWinner();
+        return this.board.getWinner();
     }
     
 }

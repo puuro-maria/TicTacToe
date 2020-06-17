@@ -8,13 +8,18 @@ package domain;
 public class Board {
     
     private int[][] board;
+    private int need;
+    int winner = 0;
+    int aiBestPos = -10;
+    int playerBestPos = 10;
     
     /**
      * Constructor sets up the game board and all its cells as blanks
      * @param x determines the size of the board
      * 
      */
-    public Board(int x) {
+    public Board(int x, int need) {
+        this.need = need;
         this.board = new int[x][x];
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
@@ -34,9 +39,13 @@ public class Board {
 
         if (cell == 0) {
             this.board[x][y] = cell;
+            setWinner(0);
         }
         if (isFreeCell(x, y)) {
             this.board[x][y] = cell;
+            if (positionValue(x, y, cell) == need * cell) {
+                setWinner(cell);
+            }
             return true;
         }
         
@@ -63,7 +72,7 @@ public class Board {
      */
     public int checkWinner() {
 
-        int player;
+        /*int player;
 
         
         //go through columns
@@ -178,6 +187,89 @@ public class Board {
             }
         }
         
+        //-------------------------------------------------
+        
+        */
+        return 0;
+       
+    }
+    
+    /**
+     * This method returns the cell position value for minimax.It only checks values based on the last move, no need to iterate through the whole board
+     * @param x row
+     * @param y column
+     * @param turn which player
+     * @return optimal value of position
+     */
+    public int positionValue(int x, int y, int turn) {
+        int r = x;
+        int c = y;
+        
+        //row
+        int[] row = board[r];
+
+        //find row's optimal value for each player (1 or -10)
+        int optSumRow = 0;
+        for (int i = 0; i <= row.length-need; i++) {
+            int count = 0;
+            int sum = 0;
+            while (count < need) {
+                sum = sum + row[i + count];
+                count++;
+            }
+            if (turn == 1 & sum >= optSumRow & sum > 0) {
+                optSumRow = sum;
+            } else if (turn == -10 & sum <= optSumRow & sum % 10 == 0) {
+                optSumRow = sum;
+            }
+        }
+         
+        //column
+        int[] column = new int[board.length];
+        for (int i = 0; i < board.length; i++) {
+            column[i] = board[i][c];
+        }
+        
+        // optimal sum for column
+        int optSumCol = 0;
+        for (int i = 0; i <= board.length - need; i++) {
+            int count = 0;
+            int sum = 0;
+            while (count < need) {
+                sum = column[i + count];
+                count++;
+            }
+            if (turn == 1 & sum >= optSumCol & sum > 0) {
+                optSumCol = sum;
+            } else if (turn == -10 & sum <= optSumCol & sum % 10 == 0) {
+                optSumCol = sum;
+            }
+        }
+        
+        
+        if (turn == 1) {
+            if (optSumRow >= optSumCol) {
+                setBestPosition(turn, optSumRow);
+                return optSumRow;
+            } else {
+                setBestPosition(turn, optSumCol);
+                return optSumCol;
+            }
+        } else if (turn == -10) {
+            if (optSumRow <= optSumCol) {
+                setBestPosition(turn, optSumRow);
+                return optSumRow;
+            } else {
+                setBestPosition(turn, optSumCol);
+                return optSumCol;
+            }
+        }
+        
+        //diagonals TODO
+        int[] diagonal = new int[board.length];
+        int tempC = c;
+        int tempR = r;
+        
         return 0;
     }
     
@@ -199,6 +291,43 @@ public class Board {
         return this.board.length;
     }
     
+    /**
+     * PositionValue only returns the best value of a position, if it finds a winning row, it sets the winner
+     * @param w as in winning player 1 or -10
+     */
+    public void setWinner(int w) {
+        this.winner = w;
+    }
+    
+    /**
+     * returns the winning player
+     * @return winner 1 or -10
+     */
+    public int getWinner() {
+        return this.winner;
+    }
+    
+    public void setBestPosition(int cell, int posValue) {
+        if (cell == -10 & posValue <= playerBestPos) {
+            playerBestPos = posValue;
+        }
+        
+        if (cell == 1 & posValue >= aiBestPos) {
+            aiBestPos = posValue;
+        }
+        System.out.println("Paras position arvo pelaajalle :" + cell + "on " + posValue);
+    }
+    
+    public int getBestPosition(int cell) {
+        switch (cell) {
+            case 1:
+                return aiBestPos;
+            case -10:
+                return playerBestPos;
+            default:
+                return 0;
+        }
+    }
     /**
      * Get board
      * @return int[][] board
@@ -235,4 +364,7 @@ public class Board {
         return print;
     }
     
+    public int getNeed() {
+        return this.need;
+    }
 }
