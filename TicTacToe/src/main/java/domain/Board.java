@@ -245,7 +245,7 @@ public class Board {
             int count = 0;
             int sum = 0;
             while (count < need) {
-                sum = column[i + count];
+                sum = sum + column[i + count];
                 count++;
             }
             if (turn == 1 & sum >= optSumCol & sum >= 0) {

@@ -84,9 +84,10 @@ public class BoardTest {
     @Test
     public void getPositionValueWorks() {
         assertEquals(-30, winningBoard.positionValue(0,1,-10));
-        assertEquals(-10, winningBoard.positionValue(2,1,1));
-        assertEquals(-10, testBoard.positionValue(0, 2, 1));
-        assertEquals(1, testBoard.positionValue(1, 0, 1));
+        assertEquals(0, winningBoard.positionValue(2,1,1)); //this column contains two opponents but row is free
+        assertEquals(0, testBoard.positionValue(0, 2, 1)); // this row contains opponent but column is free
+        assertEquals(1, testBoard.positionValue(1, 0, 1)); //this row contains opponent, column contains one cell
+        assertEquals(-20, testBoard.positionValue(2,1,-10)); //this column already has two circles and this would be the winning move
     }
     
     @Test
