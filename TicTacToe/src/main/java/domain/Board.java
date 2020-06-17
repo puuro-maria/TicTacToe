@@ -16,6 +16,7 @@ public class Board {
     /**
      * Constructor sets up the game board and all its cells as blanks
      * @param x determines the size of the board
+     * @param need needed length of winning row
      * 
      */
     public Board(int x, int need) {
@@ -209,7 +210,15 @@ public class Board {
         int[] row = board[r];
 
         //find row's optimal value for each player (1 or -10)
-        int optSumRow = 0;
+        int optSumCol;
+        int optSumRow;
+        if (turn == -10) {
+            optSumRow = 10;
+            optSumCol = 10;
+        } else {
+            optSumRow = -10;
+            optSumCol = -10;
+        }
         for (int i = 0; i <= row.length-need; i++) {
             int count = 0;
             int sum = 0;
@@ -217,21 +226,21 @@ public class Board {
                 sum = sum + row[i + count];
                 count++;
             }
-            if (turn == 1 & sum >= optSumRow & sum > 0) {
+            if (turn == 1 & sum >= optSumRow & sum >= 0) {
                 optSumRow = sum;
             } else if (turn == -10 & sum <= optSumRow & sum % 10 == 0) {
                 optSumRow = sum;
             }
         }
-         
+        
         //column
         int[] column = new int[board.length];
-        for (int i = 0; i < board.length; i++) {
+        for (int i = 0; i < board[r].length; i++) {
             column[i] = board[i][c];
         }
         
         // optimal sum for column
-        int optSumCol = 0;
+        
         for (int i = 0; i <= board.length - need; i++) {
             int count = 0;
             int sum = 0;
@@ -239,13 +248,12 @@ public class Board {
                 sum = column[i + count];
                 count++;
             }
-            if (turn == 1 & sum >= optSumCol & sum > 0) {
+            if (turn == 1 & sum >= optSumCol & sum >= 0) {
                 optSumCol = sum;
             } else if (turn == -10 & sum <= optSumCol & sum % 10 == 0) {
                 optSumCol = sum;
             }
         }
-        
         
         if (turn == 1) {
             if (optSumRow >= optSumCol) {
@@ -255,7 +263,7 @@ public class Board {
                 setBestPosition(turn, optSumCol);
                 return optSumCol;
             }
-        } else if (turn == -10) {
+        } else {
             if (optSumRow <= optSumCol) {
                 setBestPosition(turn, optSumRow);
                 return optSumRow;
@@ -266,11 +274,7 @@ public class Board {
         }
         
         //diagonals TODO
-        int[] diagonal = new int[board.length];
-        int tempC = c;
-        int tempR = r;
-        
-        return 0;
+
     }
     
     /**
@@ -327,6 +331,10 @@ public class Board {
             default:
                 return 0;
         }
+    }
+    
+    public int getWinningPoints(){
+        return getWinner() * need;
     }
     /**
      * Get board

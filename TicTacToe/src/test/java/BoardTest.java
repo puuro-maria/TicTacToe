@@ -17,20 +17,25 @@ public class BoardTest {
     private Board board;
     private Board anotherBoard;
     private Board winningBoard;
+    private Board testBoard;
     
     public BoardTest() {
     }
     
     @Before
     public void setUp() {
-        board = new Board(3);
-        anotherBoard = new Board(4);
+        board = new Board(3, 3);
+        anotherBoard = new Board(4, 4);
         anotherBoard.setCell(1, 1, 1);
-        winningBoard = new Board(3);
+        winningBoard = new Board(3, 3);
         winningBoard.setCell(0, 0, -10);
         winningBoard.setCell(0, 1, -10);
         winningBoard.setCell(0, 2, -10);
         winningBoard.setCell(1, 1, 1);
+        testBoard = new Board(3, 3);
+        testBoard.setCell(0,0,1);
+        testBoard.setCell(0, 1, -10);
+        testBoard.setCell(1, 1, -10);
     }
     
 
@@ -49,31 +54,49 @@ public class BoardTest {
         assertEquals(-10, board.getCell(1,0));
     }
     
-    @Test
+   /* @Test
     public void CheckWinnerWorks() {
         assertTrue(winningBoard.checkWinner() == -10);
         
-        Board winningBoardTwo = new Board(3);
+        Board winningBoardTwo = new Board(3, 3);
         winningBoardTwo.setCell(0, 0, 1);
         assertFalse(winningBoardTwo.checkWinner() == 1);
         winningBoardTwo.setCell(1, 0, 1);
         winningBoardTwo.setCell(2, 0, 1);
         assertTrue(winningBoardTwo.checkWinner() == 1);
         
-        Board winningBoardThree = new Board(3);
+        Board winningBoardThree = new Board(3, 3);
         winningBoardThree.setCell(0, 0, 1);
         winningBoardThree.setCell(1, 1, 1);
         winningBoardThree.setCell(2, 2, 1);
         assertTrue(winningBoardThree.checkWinner() == 1);
         
         assertTrue(anotherBoard.checkWinner() == 0);
-    }
+    }*/
     
     
     @Test 
     public void printBoardWorks() {
         String print = winningBoard.printBoard();
         assertEquals("|O|O|O|\n| |X| |\n| | | |\n", print);
+    }
+    
+    @Test
+    public void getPositionValueWorks() {
+        assertEquals(-30, winningBoard.positionValue(0,1,-10));
+        assertEquals(-10, winningBoard.positionValue(2,1,1));
+        assertEquals(-10, testBoard.positionValue(0, 2, 1));
+        assertEquals(1, testBoard.positionValue(1, 0, 1));
+    }
+    
+    @Test
+    public void getWinnerWorks() {
+        int winner = winningBoard.getWinner();
+        assertEquals(-10, winner);
+        testBoard.setCell(1,0,1);
+        testBoard.setCell(2,0,1);
+        winner = testBoard.getWinner();
+        assertEquals(1, winner);
     }
     
 }

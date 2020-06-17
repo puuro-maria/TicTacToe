@@ -59,11 +59,7 @@ public class Controls {
      * @return boolean
      */
     public boolean gameWon() {
-        if (this.board.getWinner() != 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.board.getWinner() != 0;
     }
     
     /**

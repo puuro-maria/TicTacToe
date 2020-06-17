@@ -7,7 +7,7 @@ import domain.*;
  */
 public class AI {
     
-    public static int maxDepth = 20;
+    public static int maxDepth = 20000;
     public static int depth = 0;
      /**
       * minimax-method
@@ -29,11 +29,11 @@ public class AI {
         
         // jos syvyysmaksimi tulee vastaan tai jos peli on voitettu niin palauta best position
         if (depth == maxDepth) {
-
+            return board.getBestPosition(turn);
         } 
         
         if (board.getWinner() != 0) {
-
+            return board.getWinningPoints();
         }
         
         /*
