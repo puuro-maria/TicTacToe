@@ -319,7 +319,7 @@ public class Board {
         if (cell == 1 & posValue >= aiBestPos) {
             aiBestPos = posValue;
         }
-        System.out.println("Paras position arvo pelaajalle :" + cell + "on " + posValue);
+
     }
     
     public int getBestPosition(int cell) {
