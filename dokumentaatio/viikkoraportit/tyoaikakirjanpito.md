@@ -12,5 +12,8 @@
 | 10.6.2020 | 2 | Korjailua |
 | 11.6.2020 | 5 | Minimax-algoritmiin lisätty alfa-beeta-karsinta, bugikorjauksia |
 | 12.6.2020 | 5 | Dokumentaatiota, keskustelu ohjaajan kanssa, koodin tarkastelua ja checkstyle-korjauksia |
+| 15.6.2020 | 5 | Tietorakenteiden korjausta, poistettu turhat metodit |
+| 17.6.2020 | 7 | Voitontunnistussäännöt uusiksi, paljon säätöä |
+| 18.6.2020 | 6 | Voitontunnistussääntöjen korjauksia ja testauksia |
 | | | |
-| **YHTEENSÄ** | **43** | |
+| **YHTEENSÄ** | **61** | |
