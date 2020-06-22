@@ -212,12 +212,18 @@ public class Board {
         //find row's optimal value for each player (1 or -10)
         int optSumCol;
         int optSumRow;
+        int optSumDiagOne;
+        int optSumDiagTwo;
         if (turn == -10) {
             optSumRow = 10;
             optSumCol = 10;
+            optSumDiagOne = 10;
+            optSumDiagTwo = 10;
         } else {
             optSumRow = -10;
             optSumCol = -10;
+            optSumDiagOne = -10;
+            optSumDiagTwo = -10;
         }
         for (int i = 0; i <= row.length-need; i++) {
             int count = 0;
@@ -255,6 +261,75 @@ public class Board {
             }
         }
         
+        //diagonals 
+        // downwards from left to right
+        int tempRow = r;
+        int tempCol = c;
+        int[] diagOne = new int[board.length];
+        while (tempCol > 0 & tempRow > 0) {
+            diagOne[tempCol] = board[tempRow][tempCol];
+            tempCol--;
+            tempRow--;
+        }
+        tempCol = c+1;
+        tempRow = r+1;
+        while (tempRow < board.length-2 & tempCol < board.length-2) {
+            diagOne[tempCol] = board[tempRow][tempCol];
+            tempCol++;
+            tempRow++;
+        }
+        
+        //optimal sum for diagOne
+        for (int i = 0; i < board.length - need; i++) {
+            int count = 0;
+            int sum = 0; 
+            while (count < need) {
+                sum += diagOne[i];
+                count++;
+            }
+            if (turn == 1 & sum >= optSumDiagOne & sum >= 0) {
+                optSumDiagOne = sum;
+            } else if (turn == -10 & sum <= optSumDiagOne & sum % 10 == 0) {
+                optSumDiagOne = sum;
+            }
+        }
+        
+        // upwards from left to right
+        tempRow = r;
+        tempCol = c;
+        int[] diagTwo = new int[board.length];
+        while (tempCol > 0 & tempRow < board.length - 2) {
+            diagTwo[tempCol] = board[tempRow][tempCol];
+            tempCol--;
+            tempRow++;
+        }
+        if (r > 1) {
+            tempRow = r-1;
+        }
+        if (c < board.length - 2) {
+            tempCol = c+1;
+        }
+        while (tempCol > board.length - 2 & tempRow > 0) {
+            diagTwo[tempCol] = board[tempRow][tempCol];
+            tempCol++;
+            tempRow--;
+        }
+        // optimal value for diagTwo
+
+        for (int i = 0; i < board.length - need; i++) {
+            int count = 0;
+            int sum = 0;
+            while (count < need) {
+                sum += diagTwo[i];
+                count++;
+            }
+            if (turn == 1 & sum >= optSumDiagTwo & sum >= 0) {
+                optSumDiagTwo = sum;
+            } else if (turn == -10 & sum <= optSumDiagTwo & sum % 10 == 0) {
+                optSumDiagTwo = sum;
+            }
+        }
+        // optimal value for position
         if (turn == 1) {
             if (optSumRow >= optSumCol) {
                 setBestPosition(turn, optSumRow);
@@ -273,8 +348,6 @@ public class Board {
             }
         }
         
-        //diagonals TODO
-
     }
     
     /**

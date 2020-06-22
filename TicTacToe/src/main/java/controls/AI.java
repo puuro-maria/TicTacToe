@@ -8,7 +8,7 @@ import domain.*;
 public class AI {
     
     public static int maxDepth = 20000;
-    public static int depth = 0;
+
      /**
       * minimax-method
       * @param board
@@ -17,9 +17,8 @@ public class AI {
      * @param beta
       * @return optimal points for the AI
       */
-    public static int minimax(Board board, boolean isMax, int alpha, int beta) {
+    public static int minimax(Board board, boolean isMax, int alpha, int beta, int depth) {
         
-        depth++;
         int turn;
         if (isMax == true) {
             turn = 1;
@@ -64,9 +63,9 @@ public class AI {
                     board.setCell(r, c, turn);
                     // jos tämä ratkaisee pelin pelaajan (turn) eduksi niin return. Kutsu positionValuea äläkä enää jatka
                     if (isMax == true) {
-                        currentPoints = minimax(board, false, -100, 100);
+                        currentPoints = minimax(board, false, -100, 100, depth+1);
                     } else if (isMax == false) {
-                        currentPoints = minimax(board, true, -100, 100);
+                        currentPoints = minimax(board, true, -100, 100, depth+1);
                     } 
                     board.setCell(r, c, 0);
                     if ((isMax == true) & (currentPoints > bestPoints)) {
@@ -103,13 +102,12 @@ public class AI {
     public static String bestMove(Board board) {
         String bestMove = null;
         int bestPoints = -1000;
-        depth = 0;
         
         for (int i = 0; i < board.getBoardSize(); i++) {
             for (int j = 0; j < board.getBoardSize(); j++) {
                 if (board.getCell(i, j) == 0) {
                     board.setCell(i, j, 1);
-                    int points = minimax(board, true, -100, 100); // AI is always maximizing player
+                    int points = minimax(board, true, -100, 100, 0); // AI is always maximizing player
                     board.setCell(i, j, 0);
                     if (points > bestPoints) {
                         bestPoints = points;
