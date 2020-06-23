@@ -44,6 +44,7 @@ public class Board {
         }
         if (isFreeCell(x, y)) {
             this.board[x][y] = cell;
+            //System.out.println("Siirtosi position arvo on: " + positionValue(x,y,cell));
             if ((positionValue(x, y, cell) == need * cell & cell == -10) | (positionValue(x, y, cell) == need * 10 & cell == 1)) {
                 setWinner(cell);
             }
@@ -136,25 +137,26 @@ public class Board {
         int tempRow = r;
         int tempCol = c;
         int[] diagOne = new int[board.length];
-        while (tempCol > 0 & tempRow > 0) {
+        while (tempCol >= 0 & tempRow >= 0) {
             diagOne[tempCol] = board[tempRow][tempCol];
             tempCol--;
             tempRow--;
-        }
+        } 
+
         tempCol = c+1;
         tempRow = r+1;
-        while (tempRow < board.length-2 & tempCol < board.length-2) {
+        while (tempRow <= board.length - 1 & tempCol <= board.length - 1) {
             diagOne[tempCol] = board[tempRow][tempCol];
             tempCol++;
             tempRow++;
-        }
+        } 
         
         //optimal sum for diagOne
-        for (int i = 0; i < board.length - need; i++) {
+        for (int i = 0; i <= board.length - need; i++) {
             int count = 0;
             int sum = 0; 
             while (count < need) {
-                sum += diagOne[i];
+                sum += diagOne[i + count];
                 count++;
             }
             if (sum >= optSumDiagOneX & sum >= 0) {
@@ -164,34 +166,34 @@ public class Board {
                 optSumDiagOneO = sum;
             }
         }
-        
+
         // upwards from left to right
         tempRow = r;
         tempCol = c;
         int[] diagTwo = new int[board.length];
-        while (tempCol > 0 & tempRow < board.length - 2) {
+        while (tempCol >= 0 & tempRow < board.length) {
             diagTwo[tempCol] = board[tempRow][tempCol];
             tempCol--;
             tempRow++;
         }
-        if (r >= 1) {
+        if (r >= 1 & c <= board.length - 2) {
             tempRow = r-1;
-        }
-        if (c < board.length - 2) {
             tempCol = c+1;
+        
+            while (tempCol < board.length & tempRow >= 0) {
+                diagTwo[tempCol] = board[tempRow][tempCol];
+                tempCol++;
+                tempRow--;
+            }
         }
-        while (tempCol > board.length - 2 & tempRow > 0) {
-            diagTwo[tempCol] = board[tempRow][tempCol];
-            tempCol++;
-            tempRow--;
-        }
+
         // optimal value for diagTwo
 
-        for (int i = 0; i < board.length - need; i++) {
+        for (int i = 0; i <= board.length - need; i++) {
             int count = 0;
             int sum = 0;
             while (count < need) {
-                sum += diagTwo[i];
+                sum += diagTwo[i + count];
                 count++;
             }
             if (sum >= optSumDiagTwoX & sum >= 0) {
@@ -215,7 +217,7 @@ public class Board {
                 optX = optSumDiagTwoX;
             }
             //tähän vielä voiton esto!!!!!! eli jos optO on 1-2 päässä niin estä
-            setBestPosition(turn, optX);
+            //setBestPosition(turn, optX);
             return optX * 10;
         } else {
             if (optSumColO <= optO) {
@@ -228,7 +230,7 @@ public class Board {
                 optO = optSumDiagTwoO;
             }
             // vielä vastustajan voiton esto
-            setBestPosition(turn, optO);
+            //setBestPosition(turn, optO);
             return optO;
         }
         
