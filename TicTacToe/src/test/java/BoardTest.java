@@ -19,6 +19,7 @@ public class BoardTest {
     private Board winningBoard;
     private Board testBoard;
     private Board diagonalWin;
+    private Board bigDiagonal;
     
     public BoardTest() {
     }
@@ -40,7 +41,10 @@ public class BoardTest {
         diagonalWin = new Board(3, 3);
         diagonalWin.setCell(0,0,1);
         diagonalWin.setCell(1,1,1);
-        
+        bigDiagonal = new Board(4,3);
+        bigDiagonal.setCell(0,0,-10);
+        bigDiagonal.setCell(1,1,-10);
+        bigDiagonal.setCell(2,2,-10);
     }
     
 
@@ -88,6 +92,18 @@ public class BoardTest {
         diagonalWin.setCell(2,2,1);
         winner = diagonalWin.getWinner();
         assertEquals(1, winner);
+        
+        winner = bigDiagonal.getWinner();
+        assertEquals(-10, winner);
     }
     
+    @Test
+    public void closeToWinWorks() {
+        assertTrue(diagonalWin.isOpponentCloseToWin(-10));
+        assertTrue(testBoard.isOpponentCloseToWin(1));
+        assertFalse(board.isOpponentCloseToWin(-10));
+        board.setCell(1,1,1);
+        board.setCell(0,0,-10);
+        assertFalse(board.isOpponentCloseToWin(-10));
+    }
 }

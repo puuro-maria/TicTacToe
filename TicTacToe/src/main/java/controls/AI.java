@@ -7,7 +7,7 @@ import domain.*;
  */
 public class AI {
     
-    public static int maxDepth = 20000;
+    public static int maxDepth = 5;
 
      /**
       * minimax-method
@@ -21,10 +21,13 @@ public class AI {
     public static int minimax(Board board, boolean isMax, int alpha, int beta, int depth) {
         
         int turn;
+        int opp;
         if (isMax == true) {
             turn = 1;
+            opp = -10;
         } else {
             turn = -10;
+            opp = 1;
         }
         
         //max depth reached, return position value
@@ -35,14 +38,21 @@ public class AI {
         //game won
         if (board.getWinner() != 0) {
             if (isMax == true) {
-                System.out.println("Syvyys on: " + depth + " ja voittopisteet " + board.getWinningPoints());
                 return board.getWinningPoints() + depth;
             }
             else if (isMax == false) {
-                System.out.println("Syvyys on: " + depth + " ja voittopisteet " + board.getWinningPoints());
                 return board.getWinningPoints() - depth;
             }
         }
+        
+        /*if (board.isOpponentCloseToWin(turn)) {
+            System.out.println(turn + " Voitto lähellä");
+            if (turn == 1) {
+                return -400;
+            } else {
+                return 400;
+            }
+        }*/
         
         //tie
         if (board.getWinner() == 0 & board.movesLeft() == false) {
@@ -64,9 +74,9 @@ public class AI {
                 if (board.getCell(r, c) == 0) {
                     board.setCell(r, c, turn);
                     if (isMax == true) {
-                        currentPoints = minimax(board, false, -100, 100, depth+1);
+                        currentPoints = minimax(board, false, -500, 500, depth+1);
                     } else if (isMax == false) {
-                        currentPoints = minimax(board, true, -100, 100, depth+1);
+                        currentPoints = minimax(board, true, -500, 500, depth+1);
                     } 
                     board.setCell(r, c, 0);
                     if ((isMax == true) & (currentPoints > bestPoints)) {
@@ -74,7 +84,7 @@ public class AI {
                     } else if ((isMax == false) & (currentPoints < bestPoints)) {
                         bestPoints = currentPoints;
                     }
-                    
+
                     //alpha-beta pruning
                     if (isMax == true & bestPoints >= alpha) {
                         alpha = bestPoints;
@@ -88,6 +98,7 @@ public class AI {
                     if (isMax == false & beta <= alpha) {
                         break;
                     }
+                    
                 } 
             }
         }
@@ -105,9 +116,20 @@ public class AI {
         int bestPoints = -1000;
         
         //call minimax for every available cell in board
+        row:
         for (int i = 0; i < board.getBoardSize(); i++) {
             for (int j = 0; j < board.getBoardSize(); j++) {
                 if (board.getCell(i, j) == 0) {
+                    if (board.positionValue(i, j, -10) <= (board.getNeed() * -10 + 10)) {
+                        System.out.println("-10 :n arvo melkein voitolla (koord " + i + "," + j + " on " + board.positionValue(i, j, -10));
+                        board.setCell(i, j, 1);
+                        if (!board.isOpponentCloseToWin(1)) {
+                            bestPoints = 500;
+                            bestMove = Integer.toString(i) + "," + Integer.toString(j);
+                            board.setCell(i, j, 0);
+                            break row;
+                        }
+                    }
                     board.setCell(i, j, 1);
                     int points = minimax(board, true, -100, 100, 0); // AI is always maximizing player
                     board.setCell(i, j, 0);

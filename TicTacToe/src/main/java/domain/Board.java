@@ -12,6 +12,8 @@ public class Board {
     int winner = 0;
     int aiBestPos = -10;
     int playerBestPos = 10;
+    int move = 0;
+    int bestPosMove = 0;
     
     /**
      * Constructor sets up the game board and all its cells as blanks
@@ -40,10 +42,12 @@ public class Board {
 
         if (cell == 0) {
             this.board[x][y] = cell;
+            move--;
             setWinner(0);
         }
         if (isFreeCell(x, y)) {
             this.board[x][y] = cell;
+            move++;
             //System.out.println("Siirtosi position arvo on: " + positionValue(x,y,cell));
             if ((positionValue(x, y, cell) == need * cell & cell == -10) | (positionValue(x, y, cell) == need * 10 & cell == 1)) {
                 setWinner(cell);
@@ -188,7 +192,6 @@ public class Board {
         }
 
         // optimal value for diagTwo
-
         for (int i = 0; i <= board.length - need; i++) {
             int count = 0;
             int sum = 0;
@@ -206,34 +209,41 @@ public class Board {
         // optimal value for position
         int optX = optSumRowX;
         int optO = optSumRowO;
-        if (turn == 1) {
-            if (optSumColX >= optX) {
-                optX = optSumColX;
-            } 
-            if (optSumDiagOneX >= optX) {
-                optX = optSumDiagOneX;
-            }
-            if (optSumDiagTwoX >= optX) {
-                optX = optSumDiagTwoX;
-            }
-            //tähän vielä voiton esto!!!!!! eli jos optO on 1-2 päässä niin estä
-            //setBestPosition(turn, optX);
-            return optX * 10;
-        } else {
-            if (optSumColO <= optO) {
-                optO = optSumColO;
-            }
-            if (optSumDiagOneO <= optO) {
-                optO = optSumDiagOneO;
-            }
-            if (optSumDiagTwoO <= optO) {
-                optO = optSumDiagTwoO;
-            }
-            // vielä vastustajan voiton esto
-            //setBestPosition(turn, optO);
-            return optO;
-        }
         
+        //find optimal value for X
+        if (optSumColX >= optX) {
+            optX = optSumColX;
+        } 
+        if (optSumDiagOneX >= optX) {
+            optX = optSumDiagOneX;
+        }
+        if (optSumDiagTwoX >= optX) {
+            optX = optSumDiagTwoX;
+        }
+        // find optimal value for O
+        if (optSumColO <= optO) {
+            optO = optSumColO;
+        }
+        if (optSumDiagOneO <= optO) {
+            optO = optSumDiagOneO;
+        }
+        if (optSumDiagTwoO <= optO) {
+            optO = optSumDiagTwoO;
+        }
+
+        if (turn == -10) {
+           /* if (optX >= need - 1) {
+                return -400;
+            }*/
+            setBestPosition(-10, optO);
+            return optO;
+        } else {
+            /*if (optO <= need * -10 + 10) {
+                return 400;
+            }*/
+            setBestPosition(1, optX * 10);
+            return optX * 10;
+        }
     }
     
     /**
@@ -256,9 +266,9 @@ public class Board {
     
     /**
      * Check whether there are moves left on the board
+     * @return boolean
      */
     public boolean movesLeft() {
-        int moves = 0;
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
                 if (board[i][j] == 0) {
@@ -285,17 +295,31 @@ public class Board {
         return this.winner;
     }
     
+    /**
+     * In case minimax reaches depth max, this method returns the optimal position value
+     * @param cell
+     * @param posValue 
+     */
     public void setBestPosition(int cell, int posValue) {
-        if (cell == -10 & posValue <= playerBestPos) {
+        if ((cell == -10 & posValue <= playerBestPos) | move > bestPosMove) {
             playerBestPos = posValue;
         }
         
-        if (cell == 1 & posValue >= aiBestPos) {
+        if ((cell == 1 & posValue >= aiBestPos) | move > bestPosMove) {
             aiBestPos = posValue;
+        }
+        
+        if (move > bestPosMove) {
+                bestPosMove++;
         }
 
     }
     
+    /**
+     * returns the best position value
+     * @param cell
+     * @return 
+     */
     public int getBestPosition(int cell) {
         switch (cell) {
             case 1:
@@ -307,6 +331,23 @@ public class Board {
         }
     }
     
+    public boolean isOpponentCloseToWin(int turn) {
+        if (turn == 1) {
+            if (getBestPosition(-10) <= need * -10 + 10) {
+                return true;
+            }
+        } else if (turn == -10) {
+            if (getBestPosition(1) >= need - 1) {
+                return true;
+            }
+        } 
+        return false;
+    }
+    
+    /**
+     * returns winning points for minimax evaluation
+     * @return points
+     */
     public int getWinningPoints(){
         if (getWinner() == 1) {
             return need * 10;
