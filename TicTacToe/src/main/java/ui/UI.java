@@ -20,7 +20,7 @@ public class UI {
         controls.setUpGame(size, need);
         System.out.println(controls.printBoard());
         
-        while (controls.gameWon() == false) {
+        while (controls.gameWon() == false & controls.movesLeft()) {
             //play();
             aiStart();
         }

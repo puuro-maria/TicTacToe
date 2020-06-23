@@ -7,7 +7,7 @@ import domain.*;
  */
 public class AI {
     
-    public static int maxDepth = 5;
+    public static int maxDepth = 6;
 
      /**
       * minimax-method
@@ -44,15 +44,6 @@ public class AI {
                 return board.getWinningPoints() - depth;
             }
         }
-        
-        /*if (board.isOpponentCloseToWin(turn)) {
-            System.out.println(turn + " Voitto lähellä");
-            if (turn == 1) {
-                return -400;
-            } else {
-                return 400;
-            }
-        }*/
         
         //tie
         if (board.getWinner() == 0 & board.movesLeft() == false) {
@@ -123,7 +114,7 @@ public class AI {
                     if (board.positionValue(i, j, -10) <= (board.getNeed() * -10 + 10)) {
                         board.setCell(i, j, 1);
                         if (!board.isOpponentCloseToWin(1)) {
-                            bestPoints = board.getNeed() * 10 - 2;
+                            bestPoints = board.getNeed() * 10 - 2; // 500
                             bestMove = Integer.toString(i) + "," + Integer.toString(j);
                             board.setCell(i, j, 0);
                             break row; // mitenhän tämä, nyt arvostaa toisen estämisen paremmaksi kuin oman voiton, katso huomenna läpi
