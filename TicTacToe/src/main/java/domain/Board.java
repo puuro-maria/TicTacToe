@@ -232,15 +232,15 @@ public class Board {
         }
 
         if (turn == -10) {
-           /* if (optX >= need - 1) {
-                return -400;
-            }*/
+            if (optX >= need - 1) {
+                optO = -401;
+            }
             setBestPosition(-10, optO);
             return optO;
         } else {
-            /*if (optO <= need * -10 + 10) {
-                return 400;
-            }*/
+            if (optO <= need * -10 + 10) {
+                optX = 401;
+            }
             setBestPosition(1, optX * 10);
             return optX * 10;
         }

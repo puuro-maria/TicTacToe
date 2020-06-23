@@ -30,16 +30,15 @@ public class UI {
     }  
     
     public void play() {
-    
-        System.out.print("Syötä koordinaatti (x,y):");
-        String[] coordinate = sc.nextLine().split(",");
-        int x = Integer.parseInt(coordinate[0]);
-        int y = Integer.parseInt(coordinate[1]);
-        controls.setCell(x, y, -10);
+        controls.aiTurn();
         System.out.println(controls.printBoard());
+        //System.out.println(controls.printBoard());
         if (controls.gameWon() == false) {
-            controls.aiTurn();
-            System.out.println(controls.printBoard());  
+            System.out.print("Syötä koordinaatti (x,y):");
+            String[] coordinate = sc.nextLine().split(",");
+            int x = Integer.parseInt(coordinate[0]);
+            int y = Integer.parseInt(coordinate[1]);
+            controls.setCell(x, y, -10);
         }
     }
     
