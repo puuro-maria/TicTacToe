@@ -44,7 +44,7 @@ public class Board {
         }
         if (isFreeCell(x, y)) {
             this.board[x][y] = cell;
-            if (positionValue(x, y, cell) == need * cell) {
+            if ((positionValue(x, y, cell) == need * cell & cell == -10) | (positionValue(x, y, cell) == need * 10 & cell == 1)) {
                 setWinner(cell);
             }
             return true;
@@ -65,134 +65,6 @@ public class Board {
         }
         
         return false;
-    }
-    
-    /**
-     * This method is to check whether the game has been won or tied
-     * @return Cell (CROSS, CIRCLE or BLANK in case of a tie)
-     */
-    public int checkWinner() {
-
-        /*int player;
-
-        
-        //go through columns
-        for (int i = 0; i < board.length; i++) {
-            player = board[0][i];
-            
-            if (player == 0) {
-                continue;
-            }
-            for (int j = 0; j < board[i].length; j++) {
-                if (board[j][i] != player) {
-                    player = 0;
-                    break;
-                }
-            }
-            if (player != 0) {
-                return player;
-            }
-        }
-        
-        //go through rows
-        for (int[] states : board) {
-            player = states[0];
-            if (player == 0) {
-                continue;
-            }
-            
-            for (int i : states) {
-                if (i != player) {
-                    player = 0;
-                    break;
-                }
-            }
-            if (player != 0) {
-                return player;
-            }
-        }
-        
-        //go through diagonals ei vielä tarkista muuta kuin vasemmalta keskidiagonaalin, todo
-        player = board[0][0];
-        for (int i = 0; i < board.length; i++) {
-            if (player == 0) {
-                continue;
-            }
-            if (board[i][i] != player) {
-                player = 0;
-                break;
-            }
-        }
-        if (player != 0) {
-            return player;
-        }
-        
-        //diagonals in other direction
-        int row = 0;
-        int col;
-        
-        while (row <= getBoardSize() - 1) {
-            int[] diagonal = new int[getBoardSize()];
-            col = 0;
-            int tempR = row;
-            int i = 0;
-            while (tempR >= 0) {
-                if (board[tempR][col] == player && player != 0) {
-                    diagonal[i] = board[tempR][col];
-                    tempR--;
-                    col++;
-                    i++;
-                } else {
-                    break;
-                }
-            }
-            if (diagonal[getBoardSize() - 1] == player && player != 0) {
-                System.out.println(diagonal);
-                return player;
-            } else {
-                row++;
-            }
-        }
-        
-        col = 1;
-        while (col <= getBoardSize() - 1) {
-            int[] diagonal = new int[getBoardSize()];
-            int tempC = col;
-            int i = 0;
-            row = getBoardSize() - 1;
-            while (tempC <= getBoardSize() - 1) {
-                if (board[row][tempC] == player && player != 0) {
-                    diagonal[i] = board[row][tempC];
-                    row--;
-                    tempC++;
-                    i++;
-                } else {
-                    break;
-                }
-            }
-            if (diagonal[getBoardSize() - 1] == player && player != 0) {
-                System.out.println(diagonal);
-                return player;
-            } else {
-                col++;
-            }
-        }
-        
-        
-        //check if there's a tie
-        for (int[] state : board) {
-            for (int i : state) {
-                if (i == 0) {
-                    return 0;
-                }
-            }
-        }
-        
-        //-------------------------------------------------
-        
-        */
-        return 0;
-       
     }
     
     /**
@@ -303,7 +175,7 @@ public class Board {
             tempCol--;
             tempRow++;
         }
-        if (r > 1) {
+        if (r >= 1) {
             tempRow = r-1;
         }
         if (c < board.length - 2) {
@@ -333,10 +205,10 @@ public class Board {
         if (turn == 1) {
             if (optSumRow >= optSumCol) {
                 setBestPosition(turn, optSumRow);
-                return optSumRow;
+                return optSumRow * 10;
             } else {
                 setBestPosition(turn, optSumCol);
-                return optSumCol;
+                return optSumCol * 10;
             }
         } else {
             if (optSumRow <= optSumCol) {
@@ -366,6 +238,21 @@ public class Board {
      */
     public int getBoardSize() {
         return this.board.length;
+    }
+    
+    /**
+     * Check whether there are moves left on the board
+     */
+    public boolean movesLeft() {
+        int moves = 0;
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if (board[i][j] == 0) {
+                    return true;
+                }
+            }      
+        }  
+        return false;
     }
     
     /**
@@ -407,6 +294,9 @@ public class Board {
     }
     
     public int getWinningPoints(){
+        if (getWinner() == 1) {
+            return need * 10;
+        }
         return getWinner() * need;
     }
     /**

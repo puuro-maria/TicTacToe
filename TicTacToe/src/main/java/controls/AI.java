@@ -15,6 +15,7 @@ public class AI {
       * @param isMax parameter defines whether it's the turn of minimizing or maximizing player
      * @param alpha
      * @param beta
+     * @param depth current depth
       * @return optimal points for the AI
       */
     public static int minimax(Board board, boolean isMax, int alpha, int beta, int depth) {
@@ -26,13 +27,26 @@ public class AI {
             turn = -10;
         }
         
-        // jos syvyysmaksimi tulee vastaan tai jos peli on voitettu niin palauta best position
+        //max depth reached, return position value
         if (depth == maxDepth) {
             return board.getBestPosition(turn);
         } 
         
+        //game won
         if (board.getWinner() != 0) {
-            return board.getWinningPoints();
+            if (isMax == true) {
+                System.out.println("Syvyys on: " + depth + " ja voittopisteet " + board.getWinningPoints());
+                return board.getWinningPoints() + depth;
+            }
+            else if (isMax == false) {
+                System.out.println("Syvyys on: " + depth + " ja voittopisteet " + board.getWinningPoints());
+                return board.getWinningPoints() - depth;
+            }
+        }
+        
+        //tie
+        if (board.getWinner() == 0 & board.movesLeft() == false) {
+            return 0;
         }
         
         /*
@@ -103,6 +117,7 @@ public class AI {
         String bestMove = null;
         int bestPoints = -1000;
         
+        //call minimax for every available cell in board
         for (int i = 0; i < board.getBoardSize(); i++) {
             for (int j = 0; j < board.getBoardSize(); j++) {
                 if (board.getCell(i, j) == 0) {
@@ -116,7 +131,7 @@ public class AI {
                 }
             }
         }
-        System.out.println("AI:n paras siirto: " + bestMove);
+        System.out.println("AI:n paras siirto: " + bestMove + " jonka positionValue on " + bestPoints);
         return bestMove;
     }
     
