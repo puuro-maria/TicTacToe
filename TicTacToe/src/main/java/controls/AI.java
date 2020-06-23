@@ -7,7 +7,7 @@ import domain.*;
  */
 public class AI {
     
-    public static int maxDepth = 6;
+    public static int maxDepth = 5;
 
      /**
       * minimax-method
@@ -123,10 +123,10 @@ public class AI {
                     if (board.positionValue(i, j, -10) <= (board.getNeed() * -10 + 10)) {
                         board.setCell(i, j, 1);
                         if (!board.isOpponentCloseToWin(1)) {
-                            bestPoints = 500;
+                            bestPoints = board.getNeed() * 10 - 2;
                             bestMove = Integer.toString(i) + "," + Integer.toString(j);
                             board.setCell(i, j, 0);
-                            break row;
+                            break row; // mitenhän tämä, nyt arvostaa toisen estämisen paremmaksi kuin oman voiton, katso huomenna läpi
                         }
                     }
                     board.setCell(i, j, 1);
@@ -139,7 +139,7 @@ public class AI {
                 }
             }
         }
-        System.out.println("AI:n paras siirto: " + bestMove + " jonka positionValue on " + bestPoints);
+        System.out.println("AI:n siirto: " + bestMove);
         return bestMove;
     }
     

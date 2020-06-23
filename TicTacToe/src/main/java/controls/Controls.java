@@ -85,4 +85,13 @@ public class Controls {
         return this.board.getWinner();
     }
     
+    /**
+     * Are there moves left (T/F)
+     * 
+     * @return 
+     */
+    public boolean movesLeft() {
+        return board.movesLeft();
+    }
+    
 }

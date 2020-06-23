@@ -21,24 +21,56 @@ public class UI {
         System.out.println(controls.printBoard());
         
         while (controls.gameWon() == false) {
-            play();
+            //play();
+            aiStart();
         }
-        
-        System.out.println("Voittaja on: " + controls.whoWon());
+        String winner;
+        switch (controls.whoWon()) {
+            case 1:
+                winner = "AI";
+                break;
+            case -10:
+                winner = "SINÄ!!";
+                break;
+            default:
+                winner = "ei kumpikaan. Ensi kerralla ehkä";
+                break;
+        }
+        System.out.println("Voittaja on: " + winner);
         controls.gameOver();
         System.exit(0);
     }  
     
     public void play() {
-        controls.aiTurn();
+    
+        System.out.print("Syötä koordinaatti (x,y):");
+        String[] coordinate = sc.nextLine().split(",");
+        int x = Integer.parseInt(coordinate[0]);
+        int y = Integer.parseInt(coordinate[1]);
+        controls.setCell(x, y, -10);
         System.out.println(controls.printBoard());
-        //System.out.println(controls.printBoard());
-        if (controls.gameWon() == false) {
+        if (controls.gameWon() == false & controls.movesLeft()) {
+            controls.aiTurn();
+            System.out.println(controls.printBoard());  
+        } else { 
+            System.out.println("Peli on päättynyt!");
+        }
+    }
+    
+    public void aiStart() {
+        if (controls.movesLeft()) {
+            controls.aiTurn();
+            System.out.println(controls.printBoard());
+        }
+        if (controls.gameWon() == false & controls.movesLeft()) {
             System.out.print("Syötä koordinaatti (x,y):");
             String[] coordinate = sc.nextLine().split(",");
             int x = Integer.parseInt(coordinate[0]);
             int y = Integer.parseInt(coordinate[1]);
             controls.setCell(x, y, -10);
+            System.out.println(controls.printBoard());
+        } else { 
+            System.out.println("Peli on päättynyt!");
         }
     }
     
