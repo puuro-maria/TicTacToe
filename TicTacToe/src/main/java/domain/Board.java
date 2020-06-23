@@ -82,21 +82,17 @@ public class Board {
         int[] row = board[r];
 
         //find row's optimal value for each player (1 or -10)
-        int optSumCol;
-        int optSumRow;
-        int optSumDiagOne;
-        int optSumDiagTwo;
-        if (turn == -10) {
-            optSumRow = 10;
-            optSumCol = 10;
-            optSumDiagOne = 10;
-            optSumDiagTwo = 10;
-        } else {
-            optSumRow = -10;
-            optSumCol = -10;
-            optSumDiagOne = -10;
-            optSumDiagTwo = -10;
-        }
+
+        int optSumRowO = 10;
+        int optSumColO = 10;
+        int optSumDiagOneO = 10;
+        int optSumDiagTwoO = 10;
+
+        int optSumRowX = -10;
+        int optSumColX = -10;
+        int optSumDiagOneX = -10;
+        int optSumDiagTwoX = -10;
+        
         for (int i = 0; i <= row.length-need; i++) {
             int count = 0;
             int sum = 0;
@@ -104,10 +100,11 @@ public class Board {
                 sum = sum + row[i + count];
                 count++;
             }
-            if (turn == 1 & sum >= optSumRow & sum >= 0) {
-                optSumRow = sum;
-            } else if (turn == -10 & sum <= optSumRow & sum % 10 == 0) {
-                optSumRow = sum;
+            if (sum >= optSumRowX & sum >= 0) {
+                optSumRowX = sum;
+            }
+            if (sum <= optSumRowO & sum % 10 == 0) {
+                optSumRowO = sum;
             }
         }
         
@@ -126,10 +123,11 @@ public class Board {
                 sum = sum + column[i + count];
                 count++;
             }
-            if (turn == 1 & sum >= optSumCol & sum >= 0) {
-                optSumCol = sum;
-            } else if (turn == -10 & sum <= optSumCol & sum % 10 == 0) {
-                optSumCol = sum;
+            if (sum >= optSumColX & sum >= 0) {
+                optSumColX = sum;
+            }
+            if (sum <= optSumColO & sum % 10 == 0) {
+                optSumColO = sum;
             }
         }
         
@@ -159,10 +157,11 @@ public class Board {
                 sum += diagOne[i];
                 count++;
             }
-            if (turn == 1 & sum >= optSumDiagOne & sum >= 0) {
-                optSumDiagOne = sum;
-            } else if (turn == -10 & sum <= optSumDiagOne & sum % 10 == 0) {
-                optSumDiagOne = sum;
+            if (sum >= optSumDiagOneX & sum >= 0) {
+                optSumDiagOneX = sum;
+            }
+            if (sum <= optSumDiagOneO & sum % 10 == 0) {
+                optSumDiagOneO = sum;
             }
         }
         
@@ -195,29 +194,42 @@ public class Board {
                 sum += diagTwo[i];
                 count++;
             }
-            if (turn == 1 & sum >= optSumDiagTwo & sum >= 0) {
-                optSumDiagTwo = sum;
-            } else if (turn == -10 & sum <= optSumDiagTwo & sum % 10 == 0) {
-                optSumDiagTwo = sum;
+            if (sum >= optSumDiagTwoX & sum >= 0) {
+                optSumDiagTwoX = sum;
+            }
+            if (sum <= optSumDiagTwoO & sum % 10 == 0) {
+                optSumDiagTwoO = sum;
             }
         }
         // optimal value for position
+        int optX = optSumRowX;
+        int optO = optSumRowO;
         if (turn == 1) {
-            if (optSumRow >= optSumCol) {
-                setBestPosition(turn, optSumRow);
-                return optSumRow * 10;
-            } else {
-                setBestPosition(turn, optSumCol);
-                return optSumCol * 10;
+            if (optSumColX >= optX) {
+                optX = optSumColX;
+            } 
+            if (optSumDiagOneX >= optX) {
+                optX = optSumDiagOneX;
             }
+            if (optSumDiagTwoX >= optX) {
+                optX = optSumDiagTwoX;
+            }
+            //tähän vielä voiton esto!!!!!! eli jos optO on 1-2 päässä niin estä
+            setBestPosition(turn, optX);
+            return optX * 10;
         } else {
-            if (optSumRow <= optSumCol) {
-                setBestPosition(turn, optSumRow);
-                return optSumRow;
-            } else {
-                setBestPosition(turn, optSumCol);
-                return optSumCol;
+            if (optSumColO <= optO) {
+                optO = optSumColO;
             }
+            if (optSumDiagOneO <= optO) {
+                optO = optSumDiagOneO;
+            }
+            if (optSumDiagTwoO <= optO) {
+                optO = optSumDiagTwoO;
+            }
+            // vielä vastustajan voiton esto
+            setBestPosition(turn, optO);
+            return optO;
         }
         
     }

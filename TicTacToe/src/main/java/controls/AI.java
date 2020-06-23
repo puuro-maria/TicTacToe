@@ -49,19 +49,7 @@ public class AI {
             return 0;
         }
         
-        /*
-        int winner = board.checkWinner();
-        if (winner != 0) { 
-            switch (winner) {
-                case -10:
-                    return -10;
-                case 1:
-                    return 1;
-            }
-        }*/
-        
         int bestPoints;
-        
         if (isMax == false) {
             bestPoints = 100;
         } else {
@@ -75,7 +63,6 @@ public class AI {
             for (int c = 0; c < board.getBoardSize(); c++) {
                 if (board.getCell(r, c) == 0) {
                     board.setCell(r, c, turn);
-                    // jos tämä ratkaisee pelin pelaajan (turn) eduksi niin return. Kutsu positionValuea äläkä enää jatka
                     if (isMax == true) {
                         currentPoints = minimax(board, false, -100, 100, depth+1);
                     } else if (isMax == false) {
@@ -88,7 +75,7 @@ public class AI {
                         bestPoints = currentPoints;
                     }
                     
-                    /*//alpha-beta pruning
+                    //alpha-beta pruning
                     if (isMax == true & bestPoints >= alpha) {
                         alpha = bestPoints;
                     }
@@ -100,7 +87,7 @@ public class AI {
                     }
                     if (isMax == false & beta <= alpha) {
                         break;
-                    }*/
+                    }
                 } 
             }
         }
