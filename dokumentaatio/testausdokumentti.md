@@ -22,6 +22,8 @@ Tekoälyä ei voi voittaa perinteisessä 3x3 -ruudukon pelissä, jossa voittoriv
 
 AI:n siirron kesto ruudukon koon ja minimaxin syvyysrajan perusteella:
 
-| Ruudukon koko NxN | Syvyysraja | AI:n 1. vuoro kesto (ns)| AI:n 2. vuoro kesto (ns)| AI:n 3. vuoro kesto (ns) | AI:n viimeinen vuoro kesto | 
+| Ruudukon koko, voittorivi | Syvyysraja | AI:n 1. vuoro kesto (ns)| AI:n 2. vuoro kesto (ns)| AI:n 3. vuoro kesto (ns) | AI:n viimeinen vuoro kesto | 
 |:------------------:|:-------------|:-------------|:-----------------|:-----------------|:-----------|
-| 3x3 | - | 138225278 | 5348402 | 644579 | 93557 |
+| 3x3, 3 | - | 138225278 | 5348402 | 644579 | 93557 |
+| 4x4, 3 | 6 |32893678929 | 7930624862 | 535567258 | 24527415 |
+| 4x4, 3 | 5 | | | | |
