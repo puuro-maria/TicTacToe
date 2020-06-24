@@ -64,7 +64,8 @@ public class TestClass {
         controls.aiTurn();
         end = System.nanoTime();
         controls.printBoard();
-        System.out.println("AI voitti.. Viimeinen siirto vei " + (end - start) + " nanosekuntia.");
+        System.out.println("AIN siirtoon meni aikaa: " + (end - start) + " nanosekuntia.");
+        System.out.println(controls.gameWon());
     }
     
     

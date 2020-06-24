@@ -7,7 +7,7 @@ import domain.*;
  */
 public class AI {
     
-    public static int maxDepth = 6;
+    public static int maxDepth = 5;
 
      /**
       * minimax-method
@@ -120,9 +120,10 @@ public class AI {
                     if (board.positionValue(i, j, -10) <= (board.getNeed() * -10 + 10)) {
                         board.setCell(i, j, 1);
                         if (!board.isOpponentCloseToWin(1)) {
-                            bestPoints = board.getNeed() * 10 - 2; 
+                            bestPoints = 4000; 
                             bestMove = Integer.toString(i) + "," + Integer.toString(j);
                             board.setCell(i, j, 0);
+                            break;
                         }
                     }
                     board.setCell(i, j, 1);

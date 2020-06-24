@@ -21,8 +21,8 @@ public class UI {
         System.out.println(controls.printBoard());
         
         while (controls.gameWon() == false & controls.movesLeft()) {
-            play();
-            ///aiStart();
+            //play();
+            aiStart();
         }
         String winner;
         switch (controls.whoWon()) {
@@ -50,7 +50,10 @@ public class UI {
         controls.setCell(x, y, -10);
         System.out.println(controls.printBoard());
         if (controls.gameWon() == false & controls.movesLeft()) {
+            long start = System.nanoTime();
             controls.aiTurn();
+            long end = System.nanoTime();
+            System.out.println("AI:n vuoro kesti " + (end - start) + " nanosekuntia.");
             System.out.println(controls.printBoard());  
         } else { 
             System.out.println("Peli on päättynyt!");
@@ -59,7 +62,10 @@ public class UI {
     
     public void aiStart() {
         if (controls.movesLeft()) {
+            long start = System.nanoTime();
             controls.aiTurn();
+            long end = System.nanoTime();
+            System.out.println("AI:n vuoro kesti " + (end - start) + " nanosekuntia.");
             System.out.println(controls.printBoard());
         }
         if (controls.gameWon() == false & controls.movesLeft()) {
