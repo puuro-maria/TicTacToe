@@ -16,7 +16,7 @@ public class UI {
         boolean ok = false;
         int size = -1;
         while (ok == false) {
-            System.out.println("Syötä ristikon koko: ");
+            System.out.println("\n\n\nSyötä ristikon koko: ");
             try {
                 size = Integer.parseInt(sc.nextLine());
             } catch (NumberFormatException e) {
