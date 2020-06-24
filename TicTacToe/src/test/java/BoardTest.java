@@ -47,8 +47,8 @@ public class BoardTest {
         bigDiagonal.setCell(1,1,-10);
         bigDiagonal.setCell(2,2,-10);
         diag = new Board(4,3);
-        diag.setCell(1,3,1);
-        diag.setCell(2,2,1);
+        diag.setCell(3,0,1);
+        diag.setCell(2,1,1);
     }
     
 
@@ -81,8 +81,9 @@ public class BoardTest {
         assertEquals(10, testBoard.positionValue(1, 0, 1)); //this row contains opponent, column contains one cell
         assertEquals(-20, testBoard.positionValue(2,1,-10)); //this column already has two circles and this would be the winning move
         assertEquals(20, diagonalWin.positionValue(2,2,1));
-        assertEquals(20, diag.positionValue(3, 1, 1));
-        assertEquals(-29, diag.positionValue(3,1,-10));
+        //assertEquals(20, diag.positionValue(3, 1, 1));
+        //assertEquals(-29, diag.positionValue(3,1,-10));
+        assertEquals(20, diag.positionValue(1, 2, 1));
     }
     
     @Test
@@ -102,7 +103,7 @@ public class BoardTest {
         winner = bigDiagonal.getWinner();
         assertEquals(-10, winner);
         
-        diag.setCell(3,1,1);
+        diag.setCell(1,2,1);
         winner = diag.getWinner();
         assertEquals(1, winner);
     }

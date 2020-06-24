@@ -14,11 +14,13 @@ public class AITest {
     private AI ai;
     private Board board;
     private Board board4;
+    private Board bigBoard;
     
     @Before
     public void setUp() {
         board = new Board(3,3);
         board4 = new Board(4,3);
+        bigBoard = new Board(4,3);
     }
     
     @Test
@@ -56,6 +58,14 @@ public class AITest {
         
         move = AI.bestMove(board4);
         assertEquals("0,3", move);
+        
+        bigBoard.setCell(3,0, 1);
+        bigBoard.setCell(2,1,1);
+        bigBoard.setCell(1,1,-10);
+        bigBoard.setCell(1,0,-10);
+        
+        move = AI.bestMove(bigBoard);
+       // assertEquals("1,2", move);
     }
     
 }
