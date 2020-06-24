@@ -232,7 +232,7 @@ public class Board {
         }
 
         if (turn == -10) {
-            if (optX >= need - 1) {
+           if (optX >= need - 1) {
                 optO = need * -10 + 1; // need? or -401
             }
             setBestPosition(-10, optO);

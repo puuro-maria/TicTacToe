@@ -118,7 +118,7 @@ public class AI {
                         board.setCell(i, j, 0);
                         return bestMove;
                     }
-                    if ((board.positionValue(i, j, -10) <= (board.getNeed() * -10 + 10) & (board.getBoardSize() - board.getNeed() <= 1)) | (board.positionValue(i, j, -10) <= board.getNeed() * -10 + 20 & board.getBoardSize() - board.getNeed() > 1)) {
+                    if (((board.positionValue(i, j, -10) <= (board.getNeed() * -10 + 10) & (board.getBoardSize() - board.getNeed()) <= 1)) | (board.positionValue(i, j, -10) <= board.getNeed() * -10 + 20 & board.getBoardSize() - board.getNeed() > 1)) {
                         board.setCell(i, j, 1);
                         if (!board.isOpponentCloseToWin(1)) {
                             bestPoints = 4000; 
