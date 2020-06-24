@@ -112,7 +112,6 @@ public class AI {
             for (int j = 0; j < board.getBoardSize(); j++) {
                 if (board.getCell(i, j) == 0) {
                     if (board.positionValue(i, j, 1) >= board.getNeed() * 10 - 10) {
-                        System.out.println("kääk");
                         board.setCell(i, j, i);
                         bestPoints = 5000;
                         bestMove = Integer.toString(i) + "," + Integer.toString(j);
