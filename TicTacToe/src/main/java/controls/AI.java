@@ -112,10 +112,12 @@ public class AI {
             for (int j = 0; j < board.getBoardSize(); j++) {
                 if (board.getCell(i, j) == 0) {
                     if (board.positionValue(i, j, 1) >= board.getNeed() * 10 - 10) {
+                        System.out.println("kääk");
                         board.setCell(i, j, i);
                         bestPoints = 5000;
                         bestMove = Integer.toString(i) + "," + Integer.toString(j);
                         board.setCell(i, j, 0);
+                        return bestMove;
                     }
                     if (board.positionValue(i, j, -10) <= (board.getNeed() * -10 + 10)) {
                         board.setCell(i, j, 1);
@@ -123,7 +125,6 @@ public class AI {
                             bestPoints = 4000; 
                             bestMove = Integer.toString(i) + "," + Integer.toString(j);
                             board.setCell(i, j, 0);
-                            break;
                         }
                     }
                     board.setCell(i, j, 1);
