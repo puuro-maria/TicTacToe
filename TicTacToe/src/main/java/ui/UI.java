@@ -13,10 +13,37 @@ public class UI {
     Controls controls = new Controls();
     
     public void start() {
-        System.out.println("Syötä ristikon koko: ");
-        int size = Integer.parseInt(sc.nextLine());
-        System.out.println("Syötä voittorivin pituus");
-        int need = Integer.parseInt(sc.nextLine());
+        boolean ok = false;
+        int size = -1;
+        while (ok == false) {
+            System.out.println("Syötä ristikon koko: ");
+            try {
+                size = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Täytyy olla kokonaisluku!");
+            }
+            if (size < 0) {
+                System.out.println("Täytyy olla positiivinen luku!");
+            } else {
+                ok = true;
+            }
+        }
+        
+        int need = -1;
+        boolean okk = false;
+        while (okk == false) {
+            System.out.println("Syötä voittorivin pituus");
+            try {
+            need = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Täytyy olla kokonaisluku!");
+            } 
+            if (need < 0) {
+                System.out.println("Täytyy olla positiivinen luku!");
+            } else {
+                okk = true;
+            }
+        }
         controls.setUpGame(size, need);
         System.out.println(controls.printBoard());
         
@@ -42,18 +69,29 @@ public class UI {
     }  
     
     public void play() {
-    
-        System.out.print("Syötä koordinaatti (x,y):");
-        String[] coordinate = sc.nextLine().split(",");
-        int x = Integer.parseInt(coordinate[0]);
-        int y = Integer.parseInt(coordinate[1]);
-        controls.setCell(x, y, -10);
+        
+        int x = -100;
+        int y = -100;
+        boolean ok = false;
+        while (ok == false) {
+            System.out.print("Syötä koordinaatti (x,y):");
+            String input = sc.nextLine();
+            if (input.contains(",") & input.length() > 2) {
+                String[] coordinate = input.split(",");
+                x = Integer.parseInt(coordinate[0]);
+                y = Integer.parseInt(coordinate[1]);
+                ok = controls.setCell(x, y, -10);
+                controls.setCell(x, y, -10);
+            } else {
+                System.out.println("Virheellinen syöte.");
+            }
+        } 
         System.out.println(controls.printBoard());
         if (controls.gameWon() == false & controls.movesLeft()) {
             long start = System.nanoTime();
             controls.aiTurn();
             long end = System.nanoTime();
-            System.out.println("AI:n vuoro kesti " + (end - start) + " nanosekuntia.");
+            //System.out.println("AI:n vuoro kesti " + (end - start) + " nanosekuntia.");
             System.out.println(controls.printBoard());  
         } else { 
             System.out.println("Peli on päättynyt!");
@@ -65,15 +103,26 @@ public class UI {
             long start = System.nanoTime();
             controls.aiTurn();
             long end = System.nanoTime();
-            System.out.println("AI:n vuoro kesti " + (end - start) + " nanosekuntia.");
+            //System.out.println("AI:n vuoro kesti " + (end - start) + " nanosekuntia.");
             System.out.println(controls.printBoard());
         }
         if (controls.gameWon() == false & controls.movesLeft()) {
-            System.out.print("Syötä koordinaatti (x,y):");
-            String[] coordinate = sc.nextLine().split(",");
-            int x = Integer.parseInt(coordinate[0]);
-            int y = Integer.parseInt(coordinate[1]);
-            controls.setCell(x, y, -10);
+            int x = -100;
+            int y = -100;
+            boolean ok = false;
+            while (ok == false) {
+                System.out.print("Syötä koordinaatti (x,y):");
+                String input = sc.nextLine();
+                if (input.contains(",") & input.length() > 2) {
+                    String[] coordinate = input.split(",");
+                    x = Integer.parseInt(coordinate[0]);
+                    y = Integer.parseInt(coordinate[1]);
+                    ok = controls.setCell(x, y, -10);
+                    controls.setCell(x, y, -10);
+                } else {
+                    System.out.println("Virheellinen syöte.");
+                }
+            } 
             System.out.println(controls.printBoard());
         } else { 
             System.out.println("Peli on päättynyt!");

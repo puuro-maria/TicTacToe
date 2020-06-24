@@ -36,6 +36,9 @@ public class Controls {
      * @return boolean
      */
     public boolean setCell(int x, int y, int cell) {
+        if (x >= board.getBoardSize() | x < 0 | y >= board.getBoardSize() | y < 0) {
+            return false;
+        }
         if (this.board.setCell(x, y, cell)) {
             this.board.setCell(x, y, cell);
             return true;
