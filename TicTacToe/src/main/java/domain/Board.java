@@ -233,13 +233,13 @@ public class Board {
 
         if (turn == -10) {
             if (optX >= need - 1) {
-                optO = -401; // need?
+                optO = need * -10 + 1; // need? or -401
             }
             setBestPosition(-10, optO);
             return optO;
         } else {
             if (optO <= need * -10 + 10) {
-                optX = 401; // need?
+                optX = need * 10 - 1; // need? or 401
             }
             setBestPosition(1, optX * 10);
             return optX * 10;

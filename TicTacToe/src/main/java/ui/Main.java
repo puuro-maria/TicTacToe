@@ -12,9 +12,9 @@ public class Main {
      */
     public static void main(String[] args) {
         TestClass testClass = new TestClass();
-        testClass.test();
+        //testClass.test();
         UI ui = new UI();
-        //ui.start();
+        ui.start();
     }
     
 }

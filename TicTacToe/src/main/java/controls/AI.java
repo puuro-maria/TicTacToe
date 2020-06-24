@@ -111,13 +111,18 @@ public class AI {
         for (int i = 0; i < board.getBoardSize(); i++) {
             for (int j = 0; j < board.getBoardSize(); j++) {
                 if (board.getCell(i, j) == 0) {
+                    if (board.positionValue(i, j, 1) >= board.getNeed() * 10 - 10) {
+                        board.setCell(i, j, i);
+                        bestPoints = 5000;
+                        bestMove = Integer.toString(i) + "," + Integer.toString(j);
+                        board.setCell(i, j, 0);
+                    }
                     if (board.positionValue(i, j, -10) <= (board.getNeed() * -10 + 10)) {
                         board.setCell(i, j, 1);
                         if (!board.isOpponentCloseToWin(1)) {
-                            bestPoints = board.getNeed() * 10 - 2; // 500
+                            bestPoints = board.getNeed() * 10 - 2; 
                             bestMove = Integer.toString(i) + "," + Integer.toString(j);
                             board.setCell(i, j, 0);
-                            break row; // mitenhän tämä, nyt arvostaa toisen estämisen paremmaksi kuin oman voiton, katso huomenna läpi
                         }
                     }
                     board.setCell(i, j, 1);

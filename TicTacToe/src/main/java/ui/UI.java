@@ -21,8 +21,8 @@ public class UI {
         System.out.println(controls.printBoard());
         
         while (controls.gameWon() == false & controls.movesLeft()) {
-            //play();
-            aiStart();
+            play();
+            ///aiStart();
         }
         String winner;
         switch (controls.whoWon()) {
