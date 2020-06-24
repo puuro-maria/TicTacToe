@@ -15,5 +15,8 @@
 | 15.6.2020 | 5 | Tietorakenteiden korjausta, poistettu turhat metodit |
 | 17.6.2020 | 7 | Voitontunnistussäännöt uusiksi, paljon säätöä |
 | 18.6.2020 | 6 | Voitontunnistussääntöjen korjauksia ja testauksia |
+| 21.6.2020 | 7 | Voitontunnistussääntöjen viilausta, diagonaalit toimii |
+| 22.6.2020 | 6 | Koodattu sääntöihin vastustajan voiton estäminen |
+| 23.6.2020 | 9 | Ohjelma toimii nyt ja AI on älykäs, testausdokumentointia |
 | | | |
-| **YHTEENSÄ** | **61** | |
+| **YHTEENSÄ** | **83** | |
