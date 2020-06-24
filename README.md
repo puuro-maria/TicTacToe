@@ -69,3 +69,5 @@ Checkstyle-raportti:
 ```
 mvn jxr:jxr checkstyle:checkstyle
 ```
+
+**Java versio 11**
