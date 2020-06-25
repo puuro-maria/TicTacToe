@@ -9,19 +9,18 @@ Ohjelma on jaettu kolmeen eri pakkaukseen; **domain** sisältää tietorakenteet
 
 #### Pakkauskaavio
 
-![alt_text](https://github.com/puuro-maria/TicTacToe/blob/master/dokumentaatio/TicTacToe_pakkauskaavio.PNG)
+![alt_text](https://github.com/puuro-maria/TicTacToe/blob/master/dokumentaatio/kuvat/TicTacToe_pakkauskaavio.PNG)
 
 ### Luokkarakenne
 
 Domain-pakkauksessa oleva **Board**-luokka sisältää ristinollapelin ristikon ja ristikon voittosäännöt. 
-Itse ristikko on tehokkuuden vuoksi toteutettu 2D-taulukkona (int[][]), jonka arvot ovat 0, 1 tai -1. 
-Domain-pakkauksessa sijaitseva **Cell**-enum sisältää kategoriset muuttujat *CROSS*, *CIRCLE* ja *BLANK*.
+Itse ristikko on tehokkuuden vuoksi toteutettu 2D-taulukkona (int[][]), jonka arvot ovat 0 (tyhjä), 1 (risti) tai -10 (nolla). 
 
 Controls-pakkausessa oleva luokka **AI** sisältää minimax- ja alfa-beeta-karsinnan algoritmit. 
-Minimax on esitetty pseudokoodina määrittelydokumentissa. 
+Minimax ja alfa-beeta-karsinta on esitetty pseudokoodina määrittelydokumentissa. 
 Controls-luokka sisältää sovelluslogiikan, jotta käyttöliittymässä ei tarvitse kutsua useita eri luokkia ja käyttöliittymä on eriytetty hyvin tietorakenteista.
 
-Ui-pakkaus sisältää tekstikäyttöliittymän ja main-luokan.
+Ui-pakkaus sisältää tekstikäyttöliittymän ja main-luokan sekä algoritmin aikatestausta varten laaditun TestClass-testiluokan (simuloi peliä itsekseen).
 
 ## Aikavaativuus :hourglass_flowing_sand:
 
@@ -34,14 +33,12 @@ Minimax-algoritmin tilavaativuus taas on **O(bn)**, sillä rekursiivisen rakente
 
 ### Board-luokan aikavaativuudet
 
-Millaisia aikavaativuuksia Board-luokka tuo mukanaan? 
-Board-luokassa on useita metodeja, jotka iteroivat taulukon läpi. 
-Periaatteessa taulukon iteroiminen vie aina **O(n²)** aikaa, sillä ristikko on yhtä korkea kuin se on leveäkin. 
+Board-luokassa on useita metodeja, jotka iteroivat taulukon läpi, näiden aikavaativuus on **O(n^2)**. 
 Vaikka peliä pelatessa taulukko tulee iteroitua läpi useaan otteeseen, ei vakiokertoimia sisällytetä aikavaativuuteen. 
 
 ### Yhden pelivuoron aikavaativuus
 
-Mitä yhdessä pelivuorossa tapahtuu ja kauanko siinä menee? AI eli risti aloittaa. 
+**Mitä yhdessä pelivuorossa tapahtuu ja kauanko siinä menee? AI eli risti aloittaa. **
 
 - AI:n vuoron alkaessa ohjelma tarkistaa, onko pelillä voittaja. Tähän menee aikaa vain **O(1)**, sillä pelin mahdollinen voittaja asetetaan aina siirron tapahtuessa.
 
@@ -59,7 +56,7 @@ Mitä yhdessä pelivuorossa tapahtuu ja kauanko siinä menee? AI eli risti aloit
 
 - Siten yhden vuoron aikavaativuus (ilman kertoimia) on minimaxin ja alfa-beeta-karsinnan aikavaativuus, eli **O(b^(d/2))**. 
 
-## Suoritusaikojen vertailua
+## Suoritusaikojen vertailua :fast_forward:
 
 Alla olevat testaukset on tehty yliopiston tietokoneella. Jokainen peli päättyi joko tasapeliin tai AI:n voittoon (4x4 ja 5x5 -kokoisissa peliristikoissa).
 
@@ -94,3 +91,19 @@ Alfa-beeta-karsinnan ollessa mukana AI:n ensimmäisen siirron viemä aika on yll
 Tietysti myös minimaxille annetulla syvyysrajoituksella on merkitystä ohjelman nopeuteen erityisesti pelin alkuvaiheessa. 
 4x4-kokoisella peliristikolla oli vielä ihan mukavaa pelata syvyydellä 7. 
 Kun syvyyttä sääti 6:een, ensimmäiseen siirtoon meni vain 13% 7-syvyisen algoritmin ajasta.
+
+## Kommentteja työn parannusehdotuksista ja yleistä jälkipohdintaa :thinking:
+
+- Graafinen käyttöliittymä voisi olla kiva toteuttaa, mutta ei ollut tällä kurssilla prioriteettina. 
+
+- Koodissa on pitkiä metodeja, niitä voisi refaktoroida palasiksi, jotta koodin luettavuus ja päivitettävyys olisi parempi.
+
+- En tiedä, tarvitsisiko koko ristikkoa käydä tosiasiassa niin useasti läpi iteroimalla, mutta en itse löytänyt aika- tai tilatehokkaampaa tapaa suorittaa laajennettua ristinollaa.
+
+- Kun ristikon koko on yli 4x4, niin tekoäly kyllä pyrkii estämään vastustajan voittoa, muttei aina tee (ainakaan ihmisen intuitiolla katsottuna) järkevimpiä päätöksiä.
+Tämä johtunee kyllä osaltaan mnimax-algoritmin syvyysrajoituksista. 
+
+- Aihe osoittautui itselleni yllättävän haastavaksi, mutta jotenkin kuitenkin onnistuin aivojumpalla ja ohjaajan avulla saamaan ihan hyvän ristinollapelin kasaan.
+Ainakaan 3x3 tai 4x4 -kokoisia pelejä ei voi voittaa. 
+
+- Oli kuitenkin kiva yllätys onnistua ja pystyä jopa tekemään analyysia minimax-algoritmiin ja alfa-beeta-karsintaan liittyen. 
