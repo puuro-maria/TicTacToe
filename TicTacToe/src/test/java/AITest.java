@@ -70,10 +70,6 @@ public class AITest {
         move = AI.bestMove(board4);
         assertEquals("0,3", move);
         
-
-        
-        move = AI.bestMove(bigBoard);
-        //assertEquals("3,0", move);
     }
     
 }
