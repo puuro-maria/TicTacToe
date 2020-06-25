@@ -47,7 +47,7 @@ function miniMax(node, depth, maxPlayer, alpha, beta) {
       alpha = max(bestValue, alpha)
       if beta <= alpha
           break
-      return value
+      return bestValue
     }
   } else {
     value = Infinity;
@@ -58,7 +58,7 @@ function miniMax(node, depth, maxPlayer, alpha, beta) {
       beta = min(bestValue, beta)
       if beta <= alpha
           break
-      return value
+      return bestValue
     }
   }
 }
