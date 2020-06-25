@@ -35,7 +35,7 @@ public class AI {
             return board.getBestPosition(turn);
         } 
         
-        //game won
+        //game won, return winning points
         if (board.getWinner() != 0) {
             if (isMax == true) {
                 return board.getWinningPoints() + depth;
@@ -45,7 +45,7 @@ public class AI {
             }
         }
         
-        //tie
+        //tie i.e. no available moves and no winner
         if (board.getWinner() == 0 & board.movesLeft() == false) {
             return 0;
         }
@@ -100,24 +100,24 @@ public class AI {
     /**
      * Returns the optimal next move for the AI
      * @param board
-     * @return int[] best move
+     * @return String best move
      */
     public static String bestMove(Board board) {
         String bestMove = null;
         int bestPoints = -1000;
         
-        //call minimax for every available cell in board
-        row:
+        //iterate through board
         for (int i = 0; i < board.getBoardSize(); i++) {
             for (int j = 0; j < board.getBoardSize(); j++) {
                 if (board.getCell(i, j) == 0) {
+                    //if this move (i,j) would make AI win then set cell here
                     if (board.positionValue(i, j, 1) >= board.getNeed() * 10 - 10) {
                         board.setCell(i, j, i);
-                        bestPoints = 5000;
                         bestMove = Integer.toString(i) + "," + Integer.toString(j);
                         board.setCell(i, j, 0);
                         return bestMove;
                     }
+                    //if opponent is close to win (next move or two moves in case of bigger board) then give this position a high value
                     if (((board.positionValue(i, j, -10) <= (board.getNeed() * -10 + 10) & (board.getBoardSize() - board.getNeed()) <= 1)) | (board.positionValue(i, j, -10) <= board.getNeed() * -10 + 20 & board.getBoardSize() - board.getNeed() > 1)) {
                         board.setCell(i, j, 1);
                         if (!board.isOpponentCloseToWin(1)) {
@@ -127,6 +127,7 @@ public class AI {
                         }
                     }
                     board.setCell(i, j, 1);
+                    //if (i,j) is not a winning position, then call minimax
                     int points = minimax(board, true, -100, 100, 0); // AI is always maximizing player
                     board.setCell(i, j, 0);
                     if (points > bestPoints) {

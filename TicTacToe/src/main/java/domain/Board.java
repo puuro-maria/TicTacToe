@@ -45,7 +45,7 @@ public class Board {
             move--;
             setWinner(0);
         }
-        if (isFreeCell(x, y)) {
+        if (isFreeCell(x, y) & (cell == -10 | cell == 1)) {
             this.board[x][y] = cell;
             move++;
             //System.out.println("Siirtosi position arvo on: " + positionValue(x,y,cell));
@@ -230,16 +230,19 @@ public class Board {
         if (optSumDiagTwoO <= optO) {
             optO = optSumDiagTwoO;
         }
-
+        
+        //return optimal value of this position
         if (turn == -10) {
+            //if opponent is about to win, then this cell is almost as valuable as the player's own win
            if (optX >= need - 1) {
-                optO = need * -10 + 1; // need? or -401
+                optO = need * -10 + 1; 
             }
             setBestPosition(-10, optO);
             return optO;
         } else {
+            //if opponent is about to win, then this cell is almost as valuable as the player's own win
             if (optO <= need * -10 + 10) {
-                optX = need * 10 - 1; // need? or 401
+                optX = need * 10 - 1; // 
             }
             setBestPosition(1, optX * 10);
             return optX * 10;

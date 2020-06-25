@@ -91,7 +91,7 @@ public class UI {
             long start = System.nanoTime();
             controls.aiTurn();
             long end = System.nanoTime();
-            //System.out.println("AI:n vuoro kesti " + (end - start) + " nanosekuntia.");
+            System.out.println("AI:n vuoro kesti " + (end - start) + " nanosekuntia.");
             System.out.println(controls.printBoard());  
         } else { 
             System.out.println("Peli on päättynyt!");
@@ -103,7 +103,7 @@ public class UI {
             long start = System.nanoTime();
             controls.aiTurn();
             long end = System.nanoTime();
-            //System.out.println("AI:n vuoro kesti " + (end - start) + " nanosekuntia.");
+            System.out.println("AI:n vuoro kesti " + (end - start) + " nanosekuntia.");
             System.out.println(controls.printBoard());
         }
         if (controls.gameWon() == false & controls.movesLeft()) {
