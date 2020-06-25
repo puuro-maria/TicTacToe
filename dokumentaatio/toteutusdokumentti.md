@@ -41,15 +41,18 @@ Vaikka peliä pelatessa taulukko tulee iteroitua läpi useaan otteeseen, ei vaki
 
 ### Yhden pelivuoron aikavaativuus
 
-Mitä yhdessä pelivuorossa tapahtuu ja kauanko siinä menee?
+Mitä yhdessä pelivuorossa tapahtuu ja kauanko siinä menee? AI eli risti aloittaa. AI:n vuoron alkaessa 
 
 ## Suoritusaikojen vertailua
+
+Alla olevat testaukset on tehty yliopiston tietokoneella. Jokainen peli päättyi joko tasapeliin tai AI:n voittoon (4x4 ja 5x5 -kokoisissa peliristikoissa).
 
 AI:n siirron kesto ruudukon koon ja minimaxin syvyysrajan perusteella **ilman alfa-beeta-karsintaa**:
 
 | Ruudukon koko, voittorivi | Syvyysraja | AI:n 1. vuoro kesto (ns)| AI:n 2. vuoro kesto (ns)| AI:n 3. vuoro kesto (ns) | AI:n viimeinen vuoro kesto | 
 |:------------------:|:-------------|:-------------|:-----------------|:-----------------|:-----------|
 | 3x3, 3 | - | 216841531 | 4742679 | 5606616 | 535745 |
+| 4x4, 3 | 7 | en jaksa odottaa | - | - | - |
 | 4x4, 3 | 6 | 32212232587 | 7727989260 | 1660993803 | 207698481 |
 | 4x4, 3 | 5 | 3677995273 | 1249392772 | 301542103 | 145805 |
 | 5x5, 3 | 5 | en jaksa odottaa | - | - | - |
@@ -59,4 +62,19 @@ AI:n siirron kesto ruudukon koon ja minimaxin syvyysrajan perusteella **kun alfa
 | Ruudukon koko, voittorivi | Syvyysraja | AI:n 1. vuoro kesto (ns)| AI:n 2. vuoro kesto (ns)| AI:n 3. vuoro kesto (ns) | AI:n viimeinen vuoro kesto | 
 |:------------------:|:-------------|:-------------|:-----------------|:-----------------|:-----------|
 | 3x3, 3 | - | 59174692 | 59174692 | 764302 | 764302 |
-| 4X3 | 125338741 | 
+| 4x4, 3 | 7 | 1489454083 | 359343309 | 46669052 | 30747 |
+| 4X4, 3 | 6 | 198148969 | 200373017 | 10195104 | 50143 |
+| 4x4, 3 | 5 | 159722030 | 120794032 | 12199049 | 24464 |
+| 5x5, 3 | 7 | 19522993734 | 9133110524 | 4112925522 | 34999858 |
+| 5x5, 3 | 5 | 820900321 | 494547339 | 215121463 | 2802874 |
+
+### Alfa-beeta-karsinnan vaikutus suoritusaikaan
+
+Alfa-beeta karsinnan lisääminen minimax-algoritmiin tehostaa peliä siis merkittävästi. 
+Alfa-beeta-karsinnan ollessa mukana AI:n ensimmäisen siirron viemä aika on yllä olevien testien perusteella vain n. 1-27 % pelkän minimaxin viemästä ajasta riippuen peliristikon koosta. Esimerkiksi 4x4-kokoisella ristikolla, jossa voittorivi on 3 ja syvyysmaksimi on 6, alfa-beeta-karsinnalla varustetulla algoritmilla meni ensimmäisen siirron löytämiseen 0,6% siitä ajasta, mikä pelkällä minimaxilla meni.
+
+### Minimaxin syvyysrajoituksen vaikutus suoritusaikaan
+
+Tietysti myös minimaxille annetulla syvyysrajoituksella on merkitystä ohjelman nopeuteen erityisesti pelin alkuvaiheessa. 
+4x4-kokoisella peliristikolla oli vielä ihan mukavaa pelata syvyydellä 7. 
+Kun syvyyttä sääti 6:een, ensimmäiseen siirtoon meni vain 13% 7-syvyisen algoritmin ajasta.
