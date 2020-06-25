@@ -41,4 +41,22 @@ Vaikka peliä pelatessa taulukko tulee iteroitua läpi useaan otteeseen, ei vaki
 
 ### Yhden pelivuoron aikavaativuus
 
-Mitä yhdessä pelivuorossa tapahtuu ja kauanko se menee?
+Mitä yhdessä pelivuorossa tapahtuu ja kauanko siinä menee?
+
+## Suoritusaikojen vertailua
+
+AI:n siirron kesto ruudukon koon ja minimaxin syvyysrajan perusteella **ilman alfa-beeta-karsintaa**:
+
+| Ruudukon koko, voittorivi | Syvyysraja | AI:n 1. vuoro kesto (ns)| AI:n 2. vuoro kesto (ns)| AI:n 3. vuoro kesto (ns) | AI:n viimeinen vuoro kesto | 
+|:------------------:|:-------------|:-------------|:-----------------|:-----------------|:-----------|
+| 3x3, 3 | - | 216841531 | 4742679 | 5606616 | 535745 |
+| 4x4, 3 | 6 | 32212232587 | 7727989260 | 1660993803 | 207698481 |
+| 4x4, 3 | 5 | 3677995273 | 1249392772 | 301542103 | 145805 |
+| 5x5, 3 | 5 | en jaksa odottaa | - | - | - |
+
+AI:n siirron kesto ruudukon koon ja minimaxin syvyysrajan perusteella **kun alfa-beeta-karsinta on käytössä**:
+
+| Ruudukon koko, voittorivi | Syvyysraja | AI:n 1. vuoro kesto (ns)| AI:n 2. vuoro kesto (ns)| AI:n 3. vuoro kesto (ns) | AI:n viimeinen vuoro kesto | 
+|:------------------:|:-------------|:-------------|:-----------------|:-----------------|:-----------|
+| 3x3, 3 | - | 59174692 | 59174692 | 764302 | 764302 |
+| 4X3 | 125338741 | 
