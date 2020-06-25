@@ -7,7 +7,7 @@ import domain.*;
  */
 public class AI {
     
-    public static int maxDepth = 5;
+    public static int maxDepth = 7;
 
      /**
       * minimax-method

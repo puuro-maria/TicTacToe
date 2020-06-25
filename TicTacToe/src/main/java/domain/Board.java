@@ -120,7 +120,6 @@ public class Board {
         }
         
         // optimal sum for column
-        
         for (int i = 0; i <= board.length - need; i++) {
             int count = 0;
             int sum = 0;
