@@ -53,6 +53,12 @@ Mitä yhdessä pelivuorossa tapahtuu ja kauanko siinä menee? AI eli risti aloit
 
 - Mikäli ruutu ei ole AI:n voittoruutu, se kutsuu minimax-algoritmia, jonka aikavaativuus on yllä mainittu **O(b^(d/2))**, jossa b on mahdollisten siirtojen määrä ja d on minimax-algoritmille annettu syvyysrajoitus. 
 
+- Kun AI on löytänyt optimaalisen koordinaatin, se sijoitetaan peliristikkoon, tämä vie aikaa **O(1)**. Tällöin kutsutaan voitontunnistusmetodia kuten jokaisen vuoron jälkeen. Voitontunnistusmetodi on oikeastaan sama metodi kuin positionValue, joka vie **O(n²)**.
+
+- Sitten on ihmisen vuoro pelata. Jälleen tarkistetaan, onko peli päättynyt, jos ei niin ihminen sijoittaa nollan valitsemaansa ruutuun **O(1)** ja sijoitusmetodi tarkistaa, onko voittaja löytynyt **O(n²)**. 
+
+- Siten yhden vuoron aikavaativuus (ilman kertoimia) on minimaxin ja alfa-beeta-karsinnan aikavaativuus, eli **O(b^(d/2))**. 
+
 ## Suoritusaikojen vertailua
 
 Alla olevat testaukset on tehty yliopiston tietokoneella. Jokainen peli päättyi joko tasapeliin tai AI:n voittoon (4x4 ja 5x5 -kokoisissa peliristikoissa).
