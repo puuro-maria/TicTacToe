@@ -39,8 +39,7 @@ public class AI {
         if (board.getWinner() != 0) {
             if (isMax == true) {
                 return board.getWinningPoints() + depth;
-            }
-            else if (isMax == false) {
+            } else if (isMax == false) {
                 return board.getWinningPoints() - depth;
             }
         }
@@ -65,9 +64,9 @@ public class AI {
                 if (board.getCell(r, c) == 0) {
                     board.setCell(r, c, turn);
                     if (isMax == true) {
-                        currentPoints = minimax(board, false, alpha, beta, depth+1);
+                        currentPoints = minimax(board, false, alpha, beta, depth + 1);
                     } else if (isMax == false) {
-                        currentPoints = minimax(board, true, alpha, beta, depth+1);
+                        currentPoints = minimax(board, true, alpha, beta, depth + 1);
                     } 
                     board.setCell(r, c, 0);
                     if ((isMax == true) & (currentPoints > bestPoints)) {

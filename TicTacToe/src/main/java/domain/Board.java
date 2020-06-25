@@ -98,7 +98,7 @@ public class Board {
         int optSumDiagOneX = -10;
         int optSumDiagTwoX = -10;
         
-        for (int i = 0; i <= row.length-need; i++) {
+        for (int i = 0; i <= row.length - need; i++) {
             int count = 0;
             int sum = 0;
             while (count < need) {
@@ -147,8 +147,8 @@ public class Board {
             tempRow--;
         } 
 
-        tempCol = c+1;
-        tempRow = r+1;
+        tempCol = c + 1;
+        tempRow = r + 1;
         while (tempRow <= board.length - 1 & tempCol <= board.length - 1) {
             diagOne[tempCol] = board[tempRow][tempCol];
             tempCol++;
@@ -181,8 +181,8 @@ public class Board {
             tempRow++;
         }
         if (r >= 1 & c <= board.length - 2) {
-            tempRow = r-1;
-            tempCol = c+1;
+            tempRow = r - 1;
+            tempCol = c + 1;
         
             while (tempCol < board.length & tempRow >= 0) {
                 diagTwo[tempCol] = board[tempRow][tempCol];
@@ -234,7 +234,7 @@ public class Board {
         //return optimal value of this position
         if (turn == -10) {
             //if opponent is about to win, then this cell is almost as valuable as the player's own win
-           if (optX >= need - 1) {
+            if (optX >= need - 1) {
                 optO = need * -10 + 1; 
             }
             setBestPosition(-10, optO);
@@ -313,7 +313,7 @@ public class Board {
         }
         
         if (move > bestPosMove) {
-                bestPosMove++;
+            bestPosMove++;
         }
 
     }
@@ -351,7 +351,7 @@ public class Board {
      * returns winning points for minimax evaluation
      * @return points
      */
-    public int getWinningPoints(){
+    public int getWinningPoints() {
         if (getWinner() == 1) {
             return need * 10;
         }
