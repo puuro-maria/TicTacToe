@@ -38,11 +38,11 @@ Vaikka peliä pelatessa taulukko tulee iteroitua läpi useaan otteeseen, ei vaki
 
 ### Yhden pelivuoron aikavaativuus
 
-**Mitä yhdessä pelivuorossa tapahtuu ja kauanko siinä menee? AI eli risti aloittaa. **
+**Mitä yhdessä pelivuorossa tapahtuu ja kauanko siinä menee?** AI eli risti aloittaa. 
 
 - AI:n vuoron alkaessa ohjelma tarkistaa, onko pelillä voittaja. Tähän menee aikaa vain **O(1)**, sillä pelin mahdollinen voittaja asetetaan aina siirron tapahtuessa.
 
-- Jos pelillä ei ole voittajaa, ohjelma kutsuu AI-luokan bestMove-metodia, joka aloittaa peliristikon iteroinnin yksi ruutu kerrallaan, tähän menee **O(n²)**.
+- Jos pelillä ei ole voittajaa, ohjelma kutsuu AI-luokan bestMove-metodia, joka aloittaa peliristikon iteroinnin yksi ruutu kerrallaan, tähän menee aikaa **O(n²)**.
 
 - Jokaisen ruudun kohdalla ohjelma selvittää ensin, onko tämä mahdollinen voittoruutu jos asetan ristin tähän. Tässä kohdassa kutsutaan Board-luokan positionValue-metodia, jonka aikavaativuus on **O(n²)** (kertoimia ei lasketa mukaan). Jos ko. ruutu on voittoruutu, ohjelma palauttaa tämän ruudun koordinaatit.
 
