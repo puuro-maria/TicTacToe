@@ -64,7 +64,7 @@
 
             <property name="tokens" value="METHOD_DEF"/>
 
-            <property name="max" value="20"/>
+            <property name="max" value="50"/>
 
             <property name="countEmpty" value="false"/>
 
@@ -164,6 +164,10 @@
 
 
 
+    <module name="SuppressionFilter">
+        <property name="file" value="skipped_files.xml" />
+    </module>
+    
     <module name='FileLength'>
 
         <property name='max' value='500' />
