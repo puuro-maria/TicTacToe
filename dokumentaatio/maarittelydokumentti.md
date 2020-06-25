@@ -65,7 +65,7 @@ function miniMax(node, depth, maxPlayer, alpha, beta) {
 ```
 
 **Node** edustaa tässä ohjelmassa aina pelitaulukkoa kussakin vaiheessa peliä. 
-Minimaxille annetaan siis pelissä node-parametrina eli solmuparametrina pelilauta (2D-taulukko) ja minimax käy pelilaudan läpi yksi ruutu kerrallaan.
+Minimaxille annetaan siis pelissä node-parametrina pelilauta (2D-taulukko) ja minimax käy kulloisenkin pelilaudan läpi yksi ruutu kerrallaan asettamalla siihen aina joko minimoivan tai maksimoivan pelaajan merkin ja kutsumalla jälleen minimaxia.
 
 **maxPlayer** on boolean-muuttuja, joka ilmoittaa algoritmille, täytyykö sen minimoida vai maksimoida tulos.
 Rekursio tapahtuu kun halutaan selvittää, onko solmun lapsissa mahdollisesti suurempia tai pienempiä lopputulemia.
