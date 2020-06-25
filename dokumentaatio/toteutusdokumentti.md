@@ -36,12 +36,22 @@ Minimax-algoritmin tilavaativuus taas on **O(bn)**, sillä rekursiivisen rakente
 
 Millaisia aikavaativuuksia Board-luokka tuo mukanaan? 
 Board-luokassa on useita metodeja, jotka iteroivat taulukon läpi. 
-Periaatteessa taulukon iteroiminen vie aina **O(n^2)** aikaa, sillä ristikko on yhtä korkea kuin se on leveäkin. 
+Periaatteessa taulukon iteroiminen vie aina **O(n²)** aikaa, sillä ristikko on yhtä korkea kuin se on leveäkin. 
 Vaikka peliä pelatessa taulukko tulee iteroitua läpi useaan otteeseen, ei vakiokertoimia sisällytetä aikavaativuuteen. 
 
 ### Yhden pelivuoron aikavaativuus
 
-Mitä yhdessä pelivuorossa tapahtuu ja kauanko siinä menee? AI eli risti aloittaa. AI:n vuoron alkaessa 
+Mitä yhdessä pelivuorossa tapahtuu ja kauanko siinä menee? AI eli risti aloittaa. 
+
+- AI:n vuoron alkaessa ohjelma tarkistaa, onko pelillä voittaja. Tähän menee aikaa vain **O(1)**, sillä pelin mahdollinen voittaja asetetaan aina siirron tapahtuessa.
+
+- Jos pelillä ei ole voittajaa, ohjelma kutsuu AI-luokan bestMove-metodia, joka aloittaa peliristikon iteroinnin yksi ruutu kerrallaan, tähän menee **O(n²)**.
+
+- Jokaisen ruudun kohdalla ohjelma selvittää ensin, onko tämä mahdollinen voittoruutu jos asetan ristin tähän. Tässä kohdassa kutsutaan Board-luokan positionValue-metodia, jonka aikavaativuus on **O(n²)** (kertoimia ei lasketa mukaan). Jos ko. ruutu on voittoruutu, ohjelma palauttaa tämän ruudun koordinaatit.
+
+- Jos ko. ruutu ei ole voittoruutu, ohjelma tarkistaa positionValue-metodilla, onko tämä ruutu mahdollisesti *vastustajan* voittoruutu. Tähänkin menee sama **O(n²)**. Jos tämä on vastustajan voittoruutu, ruutu saa arvokkaan positionValuen, mutta iterointi ei pääty tähän, sillä seuraavahan voi olla vaikka oma voittoruutu ja se on toki kannattavaa valita mieluummin kuin estää vastustajaa voittamasta.
+
+- Mikäli ruutu ei ole AI:n voittoruutu, se kutsuu minimax-algoritmia, jonka aikavaativuus on yllä mainittu **O(b^(d/2))**, jossa b on mahdollisten siirtojen määrä ja d on minimax-algoritmille annettu syvyysrajoitus. 
 
 ## Suoritusaikojen vertailua
 
