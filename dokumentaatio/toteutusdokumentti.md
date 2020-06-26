@@ -54,7 +54,9 @@ Vaikka peliä pelatessa taulukko tulee iteroitua läpi useaan otteeseen, ei vaki
 
 - Sitten on ihmisen vuoro pelata. Jälleen tarkistetaan, onko peli päättynyt, jos ei niin ihminen sijoittaa nollan valitsemaansa ruutuun **O(1)** ja sijoitusmetodi tarkistaa, onko voittaja löytynyt **O(n²)**. 
 
-- Siten yhden vuoron aikavaativuus (ilman kertoimia) on minimaxin ja alfa-beeta-karsinnan aikavaativuus, eli **O(b^(d/2))**. 
+- Siten yhden vuoron aikavaativuus (ilman kertoimia) on minimaxin ja alfa-beeta-karsinnan aikavaativuus kerrottuna peliristikon iteroinnin aikavaativuudella, eli **O(n^2 * b^(d/2))**. 
+
+- Yhden vuoron tilavaativuus on minimaxin tilavaativuus, eli **O(bn)**, jossa b on siis jälleen mahdollisten siirtojen määrä.
 
 ## Suoritusaikojen vertailua :fast_forward:
 
