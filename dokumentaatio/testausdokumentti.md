@@ -30,6 +30,10 @@ Testiohjelman voi ajaa muokkaamalla ui-pakkauksen Main-metodia poistamalla komme
 
 **Taulukot löytyvät tämän testausdokumentin lopusta.**
 
+Kuten taulukoista näkee, AI:n vuorojen kesto ei aina ole automaattisesti lyhyempi pelin edetessä. 
+Esimerkiksi viimeisessä taulukossa näkee, että vuoro 4 on merkittävästi vuoroa 5 lyhyempi. 
+Tämä johtuu AI-luokan bestMove-metodin rakenteesta.
+
 ## Ohjelman toiminnallisuuksien käyttäjätestaus
 
 Ohjelmassa on syötteen validiointi, virhesyötteistä ohjelma pyytää syöttämään uudelleen.
