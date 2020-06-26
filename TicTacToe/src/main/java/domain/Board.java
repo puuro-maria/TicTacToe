@@ -95,15 +95,19 @@ public class Board {
         int optSumDiagOneX = -10;
         int optSumDiagTwoX = -10;
         
+        //find position values of this row (x) for each player
         optSumRowX = optimalRowSumFinder(1, x, y);
         optSumRowO = optimalRowSumFinder(-10, x, y);
         
+        //find position values of this column (y) for each player
         optSumColX = optimalColumnSumFinder(1, x, y);
         optSumColO = optimalColumnSumFinder(-10, x, y);
         
+        //same for diagonal left to right downwards
         optSumDiagOneX = optimalDiagonalOneSumFinder(1, x, y);
         optSumDiagOneO = optimalDiagonalOneSumFinder(-10, x, y);
-
+        
+        //and upwards
         optSumDiagTwoX = optimalDiagonalTwoSumFinder(1, x, y);
         optSumDiagTwoO = optimalDiagonalTwoSumFinder(-10, x, y);
         
@@ -258,6 +262,19 @@ public class Board {
         return this.need;
     }
     
+    /**
+     * Find optimal value of certain position based on already computed row, column and diagonal values
+     * @param turn
+     * @param optSumRowX
+     * @param optSumRowO
+     * @param optSumColX
+     * @param optSumColO
+     * @param optSumDiagOneX
+     * @param optSumDiagOneO
+     * @param optSumDiagTwoX
+     * @param optSumDiagTwoO
+     * @return 
+     */
     public int optimalValueOfPositionValues(int turn, int optSumRowX, int optSumRowO, int optSumColX, int optSumColO, int optSumDiagOneX, int optSumDiagOneO, int optSumDiagTwoX, int optSumDiagTwoO) {
 
         int optX = optSumRowX;
