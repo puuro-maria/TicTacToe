@@ -72,4 +72,23 @@ public class AITest {
         
     }
     
+    @Test
+    public void winningPointsWorks() {
+        board.setWinner(1);
+        assertEquals(29, ai.winningPoints(true, board, 1));
+    }
+    
+    @Test
+    public void alphaBetaPrunerWorks() {
+        int alpha1 = -100;
+        int beta1 = 100;
+        int bestPoints = 10;
+        int alpha = ai.alphaBetaPruning(alpha1, bestPoints, true);
+        assertEquals(10, alpha);
+        bestPoints = 1000;
+        int beta = ai.alphaBetaPruning(beta1, bestPoints, false);
+        assertEquals(100, beta);
+        
+    }
+    
 }

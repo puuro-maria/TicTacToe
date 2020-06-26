@@ -150,9 +150,9 @@ public class AI {
     public static int winningPoints(boolean isMax, Board board, int depth) {
         if (board.getWinner() != 0) {
             if (isMax == true) {
-                return board.getWinningPoints() + depth;
-            } else {
                 return board.getWinningPoints() - depth;
+            } else {
+                return board.getWinningPoints() + depth;
             }
         }
         return 0;
