@@ -1,5 +1,47 @@
 # Käyttöohjeet
 
+## Sovelluksen asentaminen ja käynnistäminen
+
+Käytössä on Maven-työkalu. Javan versio 11. 
+
+### Komentorivitoiminnot
+
+Lataa pakkaus omalle koneelle:
+
+```
+git clone https://github.com/puuro-maria/TicTacToe
+
+cd TicTacToe/TicTacToe
+```
+
+Luo jar-tiedosto:
+
+```
+mvn package
+```
+
+Jar-tiedosto löytyy projektin juuresta kansiosta **target** nimellä TicTacToe-1.0-SNAPSHOT.jar. Tiedoston nimi on hyvä muuttaa.
+Valmis jar-tiedosto löytyy myös [täältä](https://github.com/puuro-maria/TicTacToe/releases/tag/Final).
+
+Aja testit:
+
+ ```
+ mvn test
+ ```
+ 
+ Testikattavuusraportti (JaCoCo):
+ 
+ ```
+ mvn jacoco:report
+```
+
+Checkstyle-raportti:
+
+```
+mvn jxr:jxr checkstyle:checkstyle
+```
+
+
 ## Pelaaminen
 
 Pelissä on yksinkertainen tekstikäyttöliittymä.
