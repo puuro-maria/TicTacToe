@@ -74,7 +74,7 @@ Rekursio tapahtuu kun halutaan selvittää, onko solmun lapsissa mahdollisesti s
 
 BestMove-metodi on se metodi ohjelmassa, joku kutsuu minimaxia. 
 BestMove-metodi lähtee käymään peliristikkoa läpi yksi ruutu kerrallaan.
-Ensin algoritmi sijoittaa ristin ruutuun i,j ja tarkistaa, onko tämä ruutu sellainen ruutu, jolla AI itse voittaa pelin välittömästi ja kumoaa tekemänsä siirron (lopulliset siirrot tehdään Controls-luokassa). 
+Ensin algoritmi sijoittaa ristin ruutuun i,j (siirto kumotaan bestMoven lopuksi, siirrot tapahtuvat Controls-luokassa) ja tarkistaa, onko tämä ruutu sellainen ruutu, jolla AI itse voittaa pelin välittömästi. 
 Tämä tapahtuu kutsumalla Board-luokan positionValue-metodia, joka antaa kyseisen position optimaalisen arvon pelaajan näkökulmasta.
 Jos voittoruutu löytyy, bestMove palauttaa koordinaatit.
 Jos voittoruutua ei löydy, bestMove tarkistaa, onko kyseinen ruutu vastustajalle välitön voittoruutu. Tämä tapahtuu kutsumalla positionValue-metodia vastustajan parametreilla.
