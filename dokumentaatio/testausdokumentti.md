@@ -1,4 +1,4 @@
-# Testausdokumentti
+# Testausdokumentti :heavy_check_mark:
 
 ## Automaattinen testaus
 
@@ -15,6 +15,16 @@ Tällä hetkellä kaikki testit menevät läpi.
 Testikattavuus on Jacoco-testikattavuusraportin mukaan 96%. Testikattavuusraporttiin ei ole sisällytetty käyttöliittymäluokkaa.
 
 ![alt_text](https://github.com/puuro-maria/TicTacToe/blob/master/dokumentaatio/kuvat/jacoco_20200626.png)
+
+Checkstyle-raportin ajaminen:
+
+```
+mvn jxr:jxr checkstyle:checkstyle
+```
+
+Checkstyle-raportti 26.6.2020:
+
+![alt_text](https://github.com/puuro-maria/TicTacToe/blob/master/dokumentaatio/kuvat/checkstyle_results.png)
 
 ### Ohjelman TestClass-testiluokka ja sen ajaminen
 
