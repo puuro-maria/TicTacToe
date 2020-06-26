@@ -82,10 +82,7 @@ public class Board {
     public int positionValue(int x, int y, int turn) {
         int r = x;
         int c = y;
-        
-        //row
-        int[] row = board[r];
-
+                
         //find row's optimal value for each player (1 or -10)
 
         int optSumRowO = 10;
@@ -98,154 +95,19 @@ public class Board {
         int optSumDiagOneX = -10;
         int optSumDiagTwoX = -10;
         
-        for (int i = 0; i <= row.length - need; i++) {
-            int count = 0;
-            int sum = 0;
-            while (count < need) {
-                sum = sum + row[i + count];
-                count++;
-            }
-            if (sum >= optSumRowX & sum >= 0) {
-                optSumRowX = sum;
-            }
-            if (sum <= optSumRowO & sum % 10 == 0) {
-                optSumRowO = sum;
-            }
-        }
+        optSumRowX = optimalRowSumFinder(1, x, y);
+        optSumRowO = optimalRowSumFinder(-10, x, y);
         
-        //column
-        int[] column = new int[board.length];
-        for (int i = 0; i < board[r].length; i++) {
-            column[i] = board[i][c];
-        }
+        optSumColX = optimalColumnSumFinder(1, x, y);
+        optSumColO = optimalColumnSumFinder(-10, x, y);
         
-        // optimal sum for column
-        for (int i = 0; i <= board.length - need; i++) {
-            int count = 0;
-            int sum = 0;
-            while (count < need) {
-                sum = sum + column[i + count];
-                count++;
-            }
-            if (sum >= optSumColX & sum >= 0) {
-                optSumColX = sum;
-            }
-            if (sum <= optSumColO & sum % 10 == 0) {
-                optSumColO = sum;
-            }
-        }
-        
-        //diagonals 
-        // downwards from left to right
-        int tempRow = r;
-        int tempCol = c;
-        int[] diagOne = new int[board.length];
-        while (tempCol >= 0 & tempRow >= 0) {
-            diagOne[tempCol] = board[tempRow][tempCol];
-            tempCol--;
-            tempRow--;
-        } 
+        optSumDiagOneX = optimalDiagonalOneSumFinder(1, x, y);
+        optSumDiagOneO = optimalDiagonalOneSumFinder(-10, x, y);
 
-        tempCol = c + 1;
-        tempRow = r + 1;
-        while (tempRow <= board.length - 1 & tempCol <= board.length - 1) {
-            diagOne[tempCol] = board[tempRow][tempCol];
-            tempCol++;
-            tempRow++;
-        } 
+        optSumDiagTwoX = optimalDiagonalTwoSumFinder(1, x, y);
+        optSumDiagTwoO = optimalDiagonalTwoSumFinder(-10, x, y);
         
-        //optimal sum for diagOne
-        for (int i = 0; i <= board.length - need; i++) {
-            int count = 0;
-            int sum = 0; 
-            while (count < need) {
-                sum += diagOne[i + count];
-                count++;
-            }
-            if (sum >= optSumDiagOneX & sum >= 0) {
-                optSumDiagOneX = sum;
-            }
-            if (sum <= optSumDiagOneO & sum % 10 == 0) {
-                optSumDiagOneO = sum;
-            }
-        }
-
-        // upwards from left to right
-        tempRow = r;
-        tempCol = c;
-        int[] diagTwo = new int[board.length];
-        while (tempCol >= 0 & tempRow < board.length) {
-            diagTwo[tempCol] = board[tempRow][tempCol];
-            tempCol--;
-            tempRow++;
-        }
-        if (r >= 1 & c <= board.length - 2) {
-            tempRow = r - 1;
-            tempCol = c + 1;
-        
-            while (tempCol < board.length & tempRow >= 0) {
-                diagTwo[tempCol] = board[tempRow][tempCol];
-                tempCol++;
-                tempRow--;
-            }
-        }
-
-        // optimal value for diagTwo
-        for (int i = 0; i <= board.length - need; i++) {
-            int count = 0;
-            int sum = 0;
-            while (count < need) {
-                sum += diagTwo[i + count];
-                count++;
-            }
-            if (sum >= optSumDiagTwoX & sum >= 0) {
-                optSumDiagTwoX = sum;
-            }
-            if (sum <= optSumDiagTwoO & sum % 10 == 0) {
-                optSumDiagTwoO = sum;
-            }
-        }
-        // optimal value for position
-        int optX = optSumRowX;
-        int optO = optSumRowO;
-        
-        //find optimal value for X
-        if (optSumColX >= optX) {
-            optX = optSumColX;
-        } 
-        if (optSumDiagOneX >= optX) {
-            optX = optSumDiagOneX;
-        }
-        if (optSumDiagTwoX >= optX) {
-            optX = optSumDiagTwoX;
-        }
-        // find optimal value for O
-        if (optSumColO <= optO) {
-            optO = optSumColO;
-        }
-        if (optSumDiagOneO <= optO) {
-            optO = optSumDiagOneO;
-        }
-        if (optSumDiagTwoO <= optO) {
-            optO = optSumDiagTwoO;
-        }
-        
-        //return optimal value of this position
-        if (turn == -10) {
-            //if opponent is about to win, then this cell is almost as valuable as the player's own win
-            if (optX >= need - 1) {
-                optO = need * -10 + 1; 
-            }
-            setBestPosition(-10, optO);
-            return optO;
-        } else {
-            //if opponent is about to win, then this cell is almost as valuable as the player's own win
-            if (optO <= need * -10 + 10) {
-                optX = need * 10 - 1; // 
-            }
-            setBestPosition(1, optX * 10);
-            return optX * 10;
-        }
+        return optimalValueOfPositionValues(turn, optSumRowX, optSumRowO, optSumColX, optSumColO, optSumDiagOneX, optSumDiagOneO, optSumDiagTwoX, optSumDiagTwoO);
     }
     
     /**
@@ -394,5 +256,208 @@ public class Board {
     
     public int getNeed() {
         return this.need;
+    }
+    
+    public int optimalValueOfPositionValues(int turn, int optSumRowX, int optSumRowO, int optSumColX, int optSumColO, int optSumDiagOneX, int optSumDiagOneO, int optSumDiagTwoX, int optSumDiagTwoO) {
+
+        int optX = optSumRowX;
+        int optO = optSumRowO;
+        
+        //find optimal value for X
+        if (optSumColX >= optX) {
+            optX = optSumColX;
+        } 
+        if (optSumDiagOneX >= optX) {
+            optX = optSumDiagOneX;
+        }
+        if (optSumDiagTwoX >= optX) {
+            optX = optSumDiagTwoX;
+        }
+        // find optimal value for O
+        if (optSumColO <= optO) {
+            optO = optSumColO;
+        }
+        if (optSumDiagOneO <= optO) {
+            optO = optSumDiagOneO;
+        }
+        if (optSumDiagTwoO <= optO) {
+            optO = optSumDiagTwoO;
+        }
+        
+        //return optimal value of this position
+        if (turn == -10) {
+            //if opponent is about to win, then this cell is almost as valuable as the player's own win
+            if (optX >= need - 1) {
+                optO = need * -10 + 1; 
+            }
+            setBestPosition(-10, optO);
+            return optO;
+        } else {
+            //if opponent is about to win, then this cell is almost as valuable as the player's own win
+            if (optO <= need * -10 + 10) {
+                optX = need * 10 - 1; // 
+            }
+            setBestPosition(1, optX * 10);
+            return optX * 10;
+        }
+    }
+    
+    /**
+     * This method finds the optimal row sum for each player
+     * @param turn
+     * @param x
+     * @param y
+     * @return optimal sum of row for wanted player
+     */
+    public int optimalRowSumFinder(int turn, int x, int y) {
+        int[] row = board[x];
+        int optSumRowX = -10;
+        int optSumRowO = 10;
+        
+         for (int i = 0; i <= row.length - need; i++) {
+            int count = 0;
+            int sum = 0;
+            while (count < need) {
+                sum = sum + row[i + count];
+                count++;
+            }
+            if (sum >= optSumRowX & sum >= 0) {
+                optSumRowX = sum;
+            }
+            if (sum <= optSumRowO & sum % 10 == 0) {
+                optSumRowO = sum;
+            }
+        }
+         if (turn == 1) {
+             return optSumRowX;
+         } else {
+             return optSumRowO;
+         }
+    }
+    
+    public int optimalColumnSumFinder(int turn, int x, int y) {
+        int optSumColX = -10;
+        int optSumColO = 10;
+        
+        int[] column = new int[board.length];
+        for (int i = 0; i < board[x].length; i++) {
+            column[i] = board[i][y];
+        }
+        
+        // optimal sum for column
+        for (int i = 0; i <= board.length - need; i++) {
+            int count = 0;
+            int sum = 0;
+            while (count < need) {
+                sum = sum + column[i + count];
+                count++;
+            }
+            if (sum >= optSumColX & sum >= 0) {
+                optSumColX = sum;
+            }
+            if (sum <= optSumColO & sum % 10 == 0) {
+                optSumColO = sum;
+            }
+        }
+        if (turn == 1) {
+            return optSumColX;
+        } else {
+            return optSumColO;
+        }
+    }
+    
+    /**
+     * Finds the optimal sum for diagonal downwards from left to right for each player
+     * @param turn
+     * @param x
+     * @param y
+     * @return optimal sum
+     */
+    public int optimalDiagonalOneSumFinder(int turn, int x, int y) {
+        int optSumDiagOneX = -10;
+        int optSumDiagOneO = 10;
+        
+         int tempRow = x;
+        int tempCol = y;
+        int[] diagOne = new int[board.length];
+        while (tempCol >= 0 & tempRow >= 0) {
+            diagOne[tempCol] = board[tempRow][tempCol];
+            tempCol--;
+            tempRow--;
+        } 
+
+        tempCol = x + 1;
+        tempRow = y + 1;
+        while (tempRow <= board.length - 1 & tempCol <= board.length - 1) {
+            diagOne[tempCol] = board[tempRow][tempCol];
+            tempCol++;
+            tempRow++;
+        } 
+        
+        //optimal sum for diagOne
+        for (int i = 0; i <= board.length - need; i++) {
+            int count = 0;
+            int sum = 0; 
+            while (count < need) {
+                sum += diagOne[i + count];
+                count++;
+            }
+            if (sum >= optSumDiagOneX & sum >= 0) {
+                optSumDiagOneX = sum;
+            }
+            if (sum <= optSumDiagOneO & sum % 10 == 0) {
+                optSumDiagOneO = sum;
+            }
+        }
+        if (turn == 1) {
+            return optSumDiagOneX;
+        } else {
+            return optSumDiagOneO;
+        }
+    }
+    
+    public int optimalDiagonalTwoSumFinder(int turn, int x, int y) {
+        int optSumDiagTwoX = -10;
+        int optSumDiagTwoO = 10;
+        
+        int tempRow = x;
+        int tempCol = y;
+        int[] diagTwo = new int[board.length];
+        while (tempCol >= 0 & tempRow < board.length) {
+            diagTwo[tempCol] = board[tempRow][tempCol];
+            tempCol--;
+            tempRow++;
+        }
+        if (x >= 1 & y <= board.length - 2) {
+            tempRow = x - 1;
+            tempCol = y + 1;
+        
+            while (tempCol < board.length & tempRow >= 0) {
+                diagTwo[tempCol] = board[tempRow][tempCol];
+                tempCol++;
+                tempRow--;
+            }
+        }
+
+        // optimal value for diagTwo
+        for (int i = 0; i <= board.length - need; i++) {
+            int count = 0;
+            int sum = 0;
+            while (count < need) {
+                sum += diagTwo[i + count];
+                count++;
+            }
+            if (sum >= optSumDiagTwoX & sum >= 0) {
+                optSumDiagTwoX = sum;
+            }
+            if (sum <= optSumDiagTwoO & sum % 10 == 0) {
+                optSumDiagTwoO = sum;
+            }
+        }
+        if (turn == 1) {
+            return optSumDiagTwoX;
+        } else {
+            return optSumDiagTwoO;
+        }
     }
 }
