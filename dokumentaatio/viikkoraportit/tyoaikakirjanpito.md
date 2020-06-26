@@ -18,5 +18,8 @@
 | 21.6.2020 | 7 | Voitontunnistussääntöjen viilausta, diagonaalit toimii |
 | 22.6.2020 | 6 | Koodattu sääntöihin vastustajan voiton estäminen |
 | 23.6.2020 | 9 | Ohjelma toimii nyt ja AI on älykäs, testausdokumentointia |
+| 24.6.2020 | 3 | viilausta ja demotilaisuus |
+| 25.6.2020 | 5 | dokumentointia |
+| 26.6.2020 | 6 | dokumentointia ja refaktorointia |
 | | | |
-| **YHTEENSÄ** | **83** | |
+| **YHTEENSÄ** | **97** | |
