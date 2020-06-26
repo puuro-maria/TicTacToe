@@ -41,10 +41,11 @@ Tekoälyä ei voi voittaa perinteisessä 3x3 -ruudukon pelissä, jossa voittoriv
 
 ## TestClass-luokan testitulokset 
 
-**Pelisimulaatio 1, jossa 3x3-peli päättyy tasapeliin**
+**Pelisimulaatio 1, jossa 3x3-peli päättyy tasapeliin. Ensimmäisellä rivillä keskiarvo**
 
 | Vuoro 1 | Vuoro 2 | Vuoro 3 | Vuoro 4 |
 |:----------:|:------|:------|:---------|
+| **14688113 | 1006028 | 70766 | 14274** |
 | 115951840 | 4434190 | 578102 | 39062 |
 | 12997192 | 1074342 | 70089 | 23084 |
 | 9183837 | 800393 | 52582 | 15649 |
@@ -66,7 +67,7 @@ Tekoälyä ei voi voittaa perinteisessä 3x3 -ruudukon pelissä, jossa voittoriv
 | 8994762 | 856139 | 41581 | 6968 |
 | 9360280 | 830423 | 32904 | 7122 |
 
-**Pelisimulaatio 2, jossa 3x3-peli päättyy AI:n voittoon pelaajan virheen takia.**
+**Pelisimulaatio 2, jossa 3x3-peli päättyy AI:n voittoon pelaajan virheen takia. Ensimmäisellä rivillä keskiarvo**
 
 | Vuoro 1 | Vuoro 2 | Vuoro 3 | 
 |:----------:|:------|:------|
