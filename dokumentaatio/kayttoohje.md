@@ -50,10 +50,14 @@ Pelissä on yksinkertainen tekstikäyttöliittymä.
 
 - Peli kysyy sinulta, kuinka suuren peliristikon haluat - syötä kokonaisluku, jolloin peliristikosta tulee NxN kokoinen.
 
+![alt_text](https://github.com/puuro-maria/TicTacToe/blob/master/dokumentaatio/kuvat/TTT_ohjekuva1.PNG)
+
 - Peli kysyy sinulta, kuinka pitkän voittorivin haluat. Syötä kokonaisluku. Voittorivi ei voi olla pidempi kuin yllä syötetty N.
 
 - Peli alkaa - AI aloittaa ristillä. *Voit myös pienellä muokkauksella UI-luokassa asettaa itsesi aloittajaksi.*
 
 - Kun AI on asettanut ristin ruutuun, on sinun vuorosi. Syötä koordinaatit muodossa x,y eli esimerkiksi 1,1. Ensimmäinen rivi ja sarake on 0. 
+
+![alt_text](https://github.com/puuro-maria/TicTacToe/blob/master/dokumentaatio/kuvat/TTT_ohjekuva2.PNG)
 
 - Jatka peliä kunnes se päättyy tasapeliin tai toisen voittoon. Jos päädyt 3x3 -ruudukon pelissä AI:n voittoon, olet tehnyt jotain väärin.
