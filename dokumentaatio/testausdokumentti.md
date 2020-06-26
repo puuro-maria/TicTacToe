@@ -41,7 +41,8 @@ Tekoälyä ei voi voittaa perinteisessä 3x3 -ruudukon pelissä, jossa voittoriv
 
 ## TestClass-luokan testitulokset 
 
-**Pelisimulaatio 1, jossa 3x3-peli päättyy tasapeliin. Ensimmäisellä rivillä keskiarvo**
+
+**Pelisimulaatio 1, jossa 3x3-peli päättyy tasapeliin. Ensimmäisellä rivillä keskiarvot.**
 
 | Vuoro 1 | Vuoro 2 | Vuoro 3 | Vuoro 4 |
 |:----------:|:------|:------|:---------|
@@ -67,7 +68,7 @@ Tekoälyä ei voi voittaa perinteisessä 3x3 -ruudukon pelissä, jossa voittoriv
 | 8994762 | 856139 | 41581 | 6968 |
 | 9360280 | 830423 | 32904 | 7122 |
 
-**Pelisimulaatio 2, jossa 3x3-peli päättyy AI:n voittoon pelaajan virheen takia. Ensimmäisellä rivillä keskiarvo**
+**Pelisimulaatio 2, jossa 3x3-peli päättyy AI:n voittoon pelaajan virheen takia. Ensimmäisellä rivillä keskiarvot.**
 
 | Vuoro 1 | Vuoro 2 | Vuoro 3 | 
 |:----------:|:------|:------|
@@ -93,10 +94,11 @@ Tekoälyä ei voi voittaa perinteisessä 3x3 -ruudukon pelissä, jossa voittoriv
 | 8996843 | 747053 | 10648 |
 | 10083108 | 1156519 | 10202 |
 
-**Pelisimulaatio 3, jossa 4x4-peli 3 voittorivillä päättyy AI:n voittoon pelaajan rationaalisesta pelistä huolimatta.**
+**Pelisimulaatio 3, jossa 4x4-peli 3 voittorivillä päättyy AI:n voittoon pelaajan rationaalisesta pelistä huolimatta. Minimaxin syvyysraja tässä testissä on 7. Ensimmäisellä rivillä keskiarvot.**
 
 | Vuoro 1 | Vuoro 2 | Vuoro 3 | Vuoro 4 | Vuoro 5 | Vuoro 6 |
 |:----------:|:------|:------|:-------|:-------|:-------|
+| **804917846** | **518694403** | **28599622** | **801832** | **2902884** | **20833** |
 | 1029667179 | 525755909 | 41731827 | 938767 | 4090041 | 33000 |
 | 822413288 | 516249392 | 27342204 | 711612 | 2818467 | 20007 |
 | 833028647 | 526526497 | 27862061 | 718591 | 2956789 | 19042 |
