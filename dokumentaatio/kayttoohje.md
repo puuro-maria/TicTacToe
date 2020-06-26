@@ -23,6 +23,12 @@ mvn package
 Jar-tiedosto löytyy projektin juuresta kansiosta **target** nimellä TicTacToe-1.0-SNAPSHOT.jar. Tiedoston nimi on hyvä muuttaa.
 Valmis jar-tiedosto löytyy myös [täältä](https://github.com/puuro-maria/TicTacToe/releases/tag/Final).
 
+Aja jar-tiedosto (target-kansiossa):
+
+```
+java -jar TicTacToe-1.0-SNAPSHOT.jar
+```
+
 Aja testit:
 
  ```
