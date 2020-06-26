@@ -314,7 +314,7 @@ public class Board {
         int optSumRowX = -10;
         int optSumRowO = 10;
         
-         for (int i = 0; i <= row.length - need; i++) {
+        for (int i = 0; i <= row.length - need; i++) {
             int count = 0;
             int sum = 0;
             while (count < need) {
@@ -328,11 +328,12 @@ public class Board {
                 optSumRowO = sum;
             }
         }
-         if (turn == 1) {
-             return optSumRowX;
-         } else {
-             return optSumRowO;
-         }
+         
+        if (turn == 1) {
+            return optSumRowX;
+        } else {
+            return optSumRowO;
+        }
     }
     
     public int optimalColumnSumFinder(int turn, int x, int y) {
@@ -377,7 +378,7 @@ public class Board {
         int optSumDiagOneX = -10;
         int optSumDiagOneO = 10;
         
-         int tempRow = x;
+        int tempRow = x;
         int tempCol = y;
         int[] diagOne = new int[board.length];
         while (tempCol >= 0 & tempRow >= 0) {
