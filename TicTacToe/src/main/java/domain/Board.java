@@ -336,6 +336,13 @@ public class Board {
         }
     }
     
+    /**
+     * Finds optimal sum for the column of given coordinate and player
+     * @param turn
+     * @param x
+     * @param y
+     * @return optimal sum
+     */
     public int optimalColumnSumFinder(int turn, int x, int y) {
         int optSumColX = -10;
         int optSumColO = 10;
@@ -417,6 +424,13 @@ public class Board {
         }
     }
     
+    /**
+     * Finds the optimal sum for diagonal upwards from left to right for each player
+     * @param turn
+     * @param x
+     * @param y
+     * @return optimal sum
+     */
     public int optimalDiagonalTwoSumFinder(int turn, int x, int y) {
         int optSumDiagTwoX = -10;
         int optSumDiagTwoO = 10;
