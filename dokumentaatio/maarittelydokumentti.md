@@ -1,4 +1,4 @@
-# Sovelluksen määrittelydokumentti
+# Sovelluksen määrittelydokumentti :pencil2:
 
 Sovellus on laajennettu ristinollapeli, jossa pelaaja saa valita ristikon koon ja voittorivin pituuden.
 Ristinollaa pelataan "tekoälyä" vastaan. Tekoäly on toteutettu minimax-algoritmilla hyödyntäen alfa-beeta-karsintaa tehokkuuden maksimointiin.
@@ -34,7 +34,7 @@ Minimax käy sellaisenaan läpi (syvyysrajan salliessa) pelin joka ikisen lopput
 Alfa-beeta-karsinta on minimaxiin tarkoitettu tehostuslisä, jossa kunkin pelaajan kannalta ei-rationaaliset skenaariot jätetään jo alkuunsa huomioimatta, eikä sitä puuta siis tutkita rekursiossa enempää. 
 Tämä tehostaa minimaxia merkittävästi, kuten toteutusdokumentissa taulukoiduissa nopeustesteissä todistetaan.
 
-### Minimax ja alfa-beeta-karsinta pseudokoodina
+### Minimax ja alfa-beeta-karsinta pseudokoodina :triangular_ruler:
 
 *Ensimmäisessä kutsussa alpha on -Infinity ja beta on Infinity*
 ```
@@ -67,6 +67,16 @@ function miniMax(node, depth, maxPlayer, alpha, beta) {
 **Node** edustaa tässä ohjelmassa aina pelitaulukkoa kussakin vaiheessa peliä. 
 Minimaxille annetaan siis pelissä node-parametrina pelilauta (2D-taulukko) ja minimax käy kulloisenkin pelilaudan läpi yksi ruutu kerrallaan asettamalla siihen aina joko minimoivan tai maksimoivan pelaajan merkin ja kutsumalla jälleen minimaxia.
 
-**maxPlayer** on boolean-muuttuja, joka ilmoittaa algoritmille, täytyykö sen minimoida vai maksimoida tulos.
+**MaxPlayer** on boolean-muuttuja, joka ilmoittaa algoritmille, täytyykö sen minimoida vai maksimoida tulos.
 Rekursio tapahtuu kun halutaan selvittää, onko solmun lapsissa mahdollisesti suurempia tai pienempiä lopputulemia.
     
+### Ohjelman bestMove-metodi selitettynä :bulb:
+
+BestMove-metodi on se metodi ohjelmassa, joku kutsuu minimaxia. 
+BestMove-metodi lähtee käymään peliristikkoa läpi yksi ruutu kerrallaan.
+Ensin algoritmi sijoittaa ristin ruutuun i,j ja tarkistaa, onko tämä ruutu sellainen ruutu, jolla AI itse voittaa pelin välittömästi ja kumoaa tekemänsä siirron (lopulliset siirrot tehdään Controls-luokassa). 
+Tämä tapahtuu kutsumalla Board-luokan positionValue-metodia, joka antaa kyseisen position optimaalisen arvon pelaajan näkökulmasta.
+Jos voittoruutu löytyy, bestMove palauttaa koordinaatit.
+Jos voittoruutua ei löydy, bestMove tarkistaa, onko kyseinen ruutu vastustajalle välitön voittoruutu. Tämä tapahtuu kutsumalla positionValue-metodia vastustajan parametreilla.
+Jos tämä on välitön voittoruutu, bestPoints-arvoksi asetetaan korkea arvo - sellainen, että minimax ei löydä korkeampaa arvoa, mutta ohjelma jatkaa kuitenkin mahdollisen AI:n voittoruudun etsintää.
+Minimaxia kutsutaan yllä olevien toimintojen jälkeen ja mikäli kumpikaan yllä olevista skenaarioista ei toteudu, palautetaan minimaxin löytämä paras arvo.
