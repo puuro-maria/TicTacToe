@@ -21,44 +21,30 @@ public class AI {
     public static int minimax(Board board, boolean isMax, int alpha, int beta, int depth) {
         
         int turn;
-        int opp;
+        int bestPoints;
         if (isMax == true) {
             turn = 1;
-            opp = -10;
+            bestPoints = -100;
         } else {
             turn = -10;
-            opp = 1;
+            bestPoints = 100;
         }
         
-        //max depth reached, return position value
+        //max depth reached, return position value or if game is won, return winning points, or if game is tied return 0
         if (depth == maxDepth) {
             return board.getBestPosition(turn);
         } 
         
-        //game won, return winning points
-        if (board.getWinner() != 0) {
-            if (isMax == true) {
-                return board.getWinningPoints() + depth;
-            } else if (isMax == false) {
-                return board.getWinningPoints() - depth;
-            }
+        if (winningPoints(isMax, board, depth) != 0) {
+            return winningPoints(isMax, board, depth);
         }
         
-        //tie i.e. no available moves and no winner
         if (board.getWinner() == 0 & board.movesLeft() == false) {
             return 0;
         }
         
-        int bestPoints;
-        if (isMax == false) {
-            bestPoints = 100;
-        } else {
-            bestPoints = -100;
-        } 
-        
         int currentPoints = 0;
-        
-        //recursion
+        //minimax-recursion
         for (int r = 0; r < board.getBoardSize(); r++) {
             for (int c = 0; c < board.getBoardSize(); c++) {
                 if (board.getCell(r, c) == 0) {
@@ -76,19 +62,14 @@ public class AI {
                     }
 
                     //alpha-beta pruning
-                    if (isMax == true & bestPoints >= alpha) {
-                        alpha = bestPoints;
-                    }
+                    alpha = alphaBetaPruning(alpha, bestPoints, isMax);
                     if (isMax == true & beta <= alpha) {
                         break;
                     }
-                    if (isMax == false & bestPoints <= beta) {
-                        beta = bestPoints;
-                    }
+                    beta = alphaBetaPruning(beta, bestPoints, isMax);
                     if (isMax == false & beta <= alpha) {
                         break;
                     }
-                    
                 } 
             }
         }
@@ -140,6 +121,40 @@ public class AI {
         return bestMove;
     }
     
-
+    /**
+     * Part of alpha-beta pruning, sets new value for alpha/beta 
+     * @param alphaBeta
+     * @param bestPoints
+     * @param isMax
+     * @return alpha or beta
+     */
+    public static int alphaBetaPruning(int alphaBeta, int bestPoints, boolean isMax) {
+       
+        if (isMax == true & bestPoints >= alphaBeta) {
+            alphaBeta = bestPoints;
+        }
+                    
+        if (isMax == false & bestPoints <= alphaBeta) {
+            alphaBeta = bestPoints;
+        }
+        return alphaBeta;
+    }
     
+    /**
+     * returns winning points if game is won
+     * @param isMax
+     * @param board
+     * @param depth
+     * @return 
+     */
+    public static int winningPoints(boolean isMax, Board board, int depth) {
+        if (board.getWinner() != 0) {
+            if (isMax == true) {
+                return board.getWinningPoints() + depth;
+            } else {
+                return board.getWinningPoints() - depth;
+            }
+        }
+        return 0;
+    } 
 }
