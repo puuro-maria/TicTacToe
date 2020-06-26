@@ -32,10 +32,11 @@ Testiohjelman voi ajaa muokkaamalla ui-pakkauksen Main-metodia poistamalla komme
 
 ![alt_text](https://github.com/puuro-maria/TicTacToe/blob/master/dokumentaatio/kuvat/TTT_AI_vuorot.PNG)
 
-Kuten taulukoista *- mutta ei kuitenkaan ylläolevasta diagrammista -* näkee, AI:n vuorojen kesto ei aina ole automaattisesti lyhyempi pelin edetessä. 
 4x4-kokoisen ristikon ensimmäinen vuoro kestää keskimäärin 0,8 sekuntia kun minimaxin syvyysrajoitus on 7.
-Esimerkiksi viimeisessä taulukossa näkee, että vuoro 4 on merkittävästi vuoroa 5 lyhyempi - joskin ero on vain 0,002 sekuntia. 
+Kuten taulukoista *- mutta ei kuitenkaan ylläolevasta diagrammista -* näkee, AI:n vuorojen kesto ei aina ole automaattisesti lyhyempi pelin edetessä. 
+Dokumentin viimeisestä taulukosta näkee, että vuoro 4 on merkittävästi vuoroa 5 lyhyempi - joskin ero on vain 0,002 sekuntia. 
 Tämä johtuu AI-luokan bestMove-metodin rakenteesta; vuorossa 4 AI estää pelaajaa voittamasta, joten päätös on nopea, eikä minimax käy läpi läheskään niin montaa skenaariota kuin se normaalisti kävisi.
+Vuorossa 5 AI taas etsii koko peliristikosta optimaalisinta positiota normaalisti.
 4x4-kokoisessa taulukossa toinen vuoro kestää keskimäärin 64% ensimmäisen vuoron kestosta, mikä viittaa siihen, että toisessakin vuorossa syvyysraja tulee vielä vastaan useissa skenaarioissa.
 Vuoron 3 kohdalla ohjelma nopeutuu jo merkittävästi, vuoron 3 kesto on enää 5,5% toisen vuoron kestosta.
 Viimeisen eli voittovuoron kesto on 0,00003% ensimmäisen vuoron kestosta.
